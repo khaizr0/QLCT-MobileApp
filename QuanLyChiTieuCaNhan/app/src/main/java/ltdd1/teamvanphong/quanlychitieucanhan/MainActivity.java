@@ -1,37 +1,74 @@
 package ltdd1.teamvanphong.quanlychitieucanhan;
 
+
 import android.os.Bundle;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import android.view.MenuItem;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import java.io.*;
+import ltdd1.teamvanphong.quanlychitieucanhan.*;
 
-import ltdd1.teamvanphong.quanlychitieucanhan.databinding.ActivityMainBinding;
+public class MainActivity extends AppCompatActivity
+        implements BottomNavigationView
+        .OnNavigationItemSelectedListener {
 
-public class MainActivity extends AppCompatActivity {
-
-    private ActivityMainBinding binding;
+    BottomNavigationView bottomNavigationView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        bottomNavigationView
+                = findViewById(R.id.bottomNavigationView);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        bottomNavigationView
+                .setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.bottom_nav_home);
     }
+    AddFragment firstFragment = new AddFragment();
+    CalendarFragment secondFragment = new CalendarFragment();
+    ReportChartFragment thirdFragment = new ReportChartFragment();
+    OtherSettingFragment fourthFragment = new OtherSettingFragment();
 
+    @Override
+    public boolean
+    onNavigationItemSelected(@NonNull MenuItem item)
+    {
+
+        switch (item.getItemId()) {
+            case R.id.bottom_nav_home:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.flFragment, firstFragment)
+                        .commit();
+                return true;
+
+            case R.id.bottom_nav_calendar:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.flFragment, secondFragment)
+                        .commit();
+                return true;
+
+            case R.id.bottom_nav_chartReport:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.flFragment, thirdFragment)
+                        .commit();
+                return true;
+
+            case R.id.bottom_nav_otherSetting:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.flFragment, fourthFragment)
+                        .commit();
+                return true;
+
+
+        }
+        return false;
+    }
 }
