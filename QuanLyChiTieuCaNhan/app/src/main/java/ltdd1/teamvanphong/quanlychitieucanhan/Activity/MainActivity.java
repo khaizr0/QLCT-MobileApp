@@ -40,39 +40,35 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressLint("NonConstantResourceId")
     @Override
-    public boolean
-    onNavigationItemSelected(@NonNull MenuItem item)
-    {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
 
-        switch (item.getItemId()) {
-            case R.id.bottom_nav_home:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.flFragment, firstFragment)
-                        .commit();
-                return true;
-
-            case R.id.bottom_nav_calendar:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.flFragment, secondFragment)
-                        .commit();
-                return true;
-
-            case R.id.bottom_nav_chartReport:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.flFragment, thirdFragment)
-                        .commit();
-                return true;
-
-            case R.id.bottom_nav_otherSetting:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.flFragment, fourthFragment)
-                        .commit();
-                return true;
+        if (itemId == R.id.bottom_nav_home) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flFragment, firstFragment)
+                    .commit();
+            return true;
+        } else if (itemId == R.id.bottom_nav_calendar) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flFragment, secondFragment)
+                    .commit();
+            return true;
+        } else if (itemId == R.id.bottom_nav_chartReport) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flFragment, thirdFragment)
+                    .commit();
+            return true;
+        } else if (itemId == R.id.bottom_nav_otherSetting) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flFragment, fourthFragment)
+                    .commit();
+            return true;
         }
         return false;
     }
+
 }
