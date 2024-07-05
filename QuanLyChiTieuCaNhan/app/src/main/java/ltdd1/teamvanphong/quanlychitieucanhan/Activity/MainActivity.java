@@ -1,13 +1,18 @@
-package ltdd1.teamvanphong.quanlychitieucanhan;
+package ltdd1.teamvanphong.quanlychitieucanhan.Activity;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import java.io.*;
+
 import ltdd1.teamvanphong.quanlychitieucanhan.*;
+import ltdd1.teamvanphong.quanlychitieucanhan.Fragment.AddFragment;
+import ltdd1.teamvanphong.quanlychitieucanhan.Fragment.CalendarFragment;
+import ltdd1.teamvanphong.quanlychitieucanhan.Fragment.OtherSettingFragment;
+import ltdd1.teamvanphong.quanlychitieucanhan.Fragment.ReportChartFragment;
 
 public class MainActivity extends AppCompatActivity
         implements BottomNavigationView
@@ -33,6 +38,7 @@ public class MainActivity extends AppCompatActivity
     ReportChartFragment thirdFragment = new ReportChartFragment();
     OtherSettingFragment fourthFragment = new OtherSettingFragment();
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean
     onNavigationItemSelected(@NonNull MenuItem item)
@@ -66,8 +72,6 @@ public class MainActivity extends AppCompatActivity
                         .replace(R.id.flFragment, fourthFragment)
                         .commit();
                 return true;
-
-
         }
         return false;
     }
