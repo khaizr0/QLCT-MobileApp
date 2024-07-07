@@ -1,0 +1,16 @@
+<!-- drawable/button_selected_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#00F7FF"/> <!-- Màu xanh lá cây khi được chọn -->
+        </shape>
+    </item>
+    <item android:bottom="4dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent"/> <!-- Màu nền trong suốt -->
+            <stroke
+                android:width="2dp"
+                android:color="#FFFFFF"/> <!-- Màu viền màu trắng -->
+        </shape>
+    </item>
+</layer-list>
