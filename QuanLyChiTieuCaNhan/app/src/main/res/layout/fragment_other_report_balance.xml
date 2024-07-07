@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#333333"
-    tools:context=".Fragment.ReportFull">
+    tools:context=".Fragment.Other_report_balance">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
