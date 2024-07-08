@@ -47,6 +47,18 @@ public class OtherSettingFragment extends Fragment {
                 navigateToFragment(new Other_report_balance());
             }
         });
+        layoutReportYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToFragment(new Other_report_inYear());
+            }
+        });
+        layoutExport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToFragment(new Other_xuat_data());
+            }
+        });
         return view;
     }
 
