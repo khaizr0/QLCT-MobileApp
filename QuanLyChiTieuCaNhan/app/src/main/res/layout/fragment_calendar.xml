@@ -5,18 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FFFFFF"
     tools:context=".Fragment.CalendarFragment">
 
-    <TextView
-        android:id="@+id/textViewTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center"
-        android:text="20:21"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"/>
-
+    <!-- Calendar and Search Icon -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,6 +45,7 @@
             android:layout_marginTop="16dp"/>
     </RelativeLayout>
 
+    <!-- Income, Expense, and Total -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -114,12 +107,14 @@
             android:layout_marginStart="8dp"/>
     </LinearLayout>
 
+    <!-- Transactions List -->
     <ListView
         android:id="@+id/listViewTransactions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"/>
 
+    <!-- Navigation Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -160,5 +155,4 @@
             android:text="Khác"
             android:backgroundTint="#FFA500"/>
     </LinearLayout>
-
 </LinearLayout>

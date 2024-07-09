@@ -5,18 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FFFFFF"
     tools:context=".Fragment.AddFragment">
 
-    <TextView
-        android:id="@+id/textViewTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center"
-        android:text="12:18"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"/>
-
+    <!-- Expense and Income Tabs with Pencil Icon -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,99 +30,164 @@
                 android:layout_height="wrap_content"
                 android:text="Tiền chi"
                 android:checked="true"
-                android:buttonTint="#FFA500"/>
+                android:buttonTint="#FFA500"
+                android:textColor="#FFA500"
+                android:textSize="16sp"/>
 
             <RadioButton
                 android:id="@+id/radioIncome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tiền thu"
-                android:buttonTint="#FFA500"/>
+                android:buttonTint="#FFA500"
+                android:textColor="#FFA500"
+                android:textSize="16sp"/>
         </RadioGroup>
 
-        <EditText
-            android:id="@+id/editTextDate"
-            android:layout_width="349dp"
-            android:layout_height="54dp"
-            android:layout_below="@id/radioGroup"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/transparent"
-            android:hint="Ngày"
-            android:inputType="date"
-            android:text="07/07/2024 (CN)" />
-
-        <EditText
-            android:id="@+id/editTextNote"
-            android:layout_width="347dp"
-            android:layout_height="48dp"
-            android:layout_below="@id/editTextDate"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/transparent"
-            android:hint="Ghi chú" />
-
-        <EditText
-            android:id="@+id/editTextAmount"
-            android:layout_width="347dp"
-            android:layout_height="58dp"
-            android:layout_below="@id/editTextNote"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/transparent"
-            android:hint="Tiền chi"
-            android:inputType="numberDecimal"
-            android:text="0" />
-
-        <TextView
-            android:id="@+id/textViewCategory"
-            android:layout_width="352dp"
-            android:layout_height="46dp"
-            android:layout_below="@id/editTextAmount"
-            android:layout_marginTop="16dp"
-            android:text="Danh mục"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+        <!-- Pencil Icon -->
+        <ImageView
+            android:id="@+id/pencilIcon"
+            android:layout_width="50dp"
+            android:layout_height="44dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:padding="10dp"
+            android:src="@drawable/pencil" />
     </RelativeLayout>
 
+    <!-- Date Label and Input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="Ngày"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:padding="10dp"/>
+        <EditText
+            android:id="@+id/editTextDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:background="@android:color/transparent"
+            android:inputType="date"
+            android:text="07/07/2024 (CN)"
+            android:textSize="16sp"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+
+
+
+    <!-- Note Label and Input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="Ghi chú"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:padding="10dp"/>
+        <EditText
+            android:id="@+id/editTextNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:background="@android:color/transparent"
+            android:hint="Chưa nhập vào"
+            android:textSize="16sp"
+            android:padding="10dp"/>
+        </LinearLayout>
+
+
+    <!-- Amount Label and Input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:text="Tiền chi"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:padding="10dp"/>
+        <EditText
+            android:id="@+id/editTextAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:background="@android:color/transparent"
+            android:inputType="numberDecimal"
+            android:text="0"
+            android:textSize="16sp"
+            android:padding="10dp"/>
+    </LinearLayout>
+
+
+    <!-- Category Title -->
+    <TextView
+        android:id="@+id/textViewCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Danh mục"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:padding="10dp"/>
+
+    <!-- Category Grid -->
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:columnCount="3"
-        android:rowCount="4">
+        android:rowCount="4"
+        android:padding="10dp">
 
-        <!-- Example category buttons -->
-        <Button
+        <!-- Include category buttons -->
+        <include layout="@layout/category_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="Ăn uống"
-            android:drawableTop="@android:drawable/ic_menu_view"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:id="@+id/categoryButton1"/>
 
-        <Button
+        <include layout="@layout/category_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="Chi tiêu hàng ngày"
-            android:drawableTop="@android:drawable/ic_menu_view"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:id="@+id/categoryButton2"/>
 
-        <Button
+        <include layout="@layout/category_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="Quần áo"
-            android:drawableTop="@android:drawable/ic_menu_view"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:id="@+id/categoryButton3"/>
 
-        <!-- Add more buttons as needed -->
+        <!-- Add more include statements as needed for each category button -->
     </GridLayout>
 
+    <!-- Submit Button -->
     <Button
         android:id="@+id/buttonEnterExpense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="Nhập khoản chi"
-        android:backgroundTint="#FFA500"/>
-
+        android:textSize="16sp"
+        android:backgroundTint="#FFA500"
+        android:textColor="@android:color/white"/>
 </LinearLayout>
