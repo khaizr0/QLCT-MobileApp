@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF"
+    android:background="#45454545"
     tools:context=".Fragment.AddFragment">
 
     <!-- Expense and Income Tabs with Pencil Icon -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="#F5F5F5"
+
+        android:background="#000000"
         android:padding="16dp"
         android:elevation="4dp">
 
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:text="Ngày"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="16sp"
             android:padding="10dp"/>
         <EditText
@@ -78,7 +78,8 @@
             android:inputType="date"
             android:text="07/07/2024 (CN)"
             android:textSize="16sp"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:textColor="@android:color/white"/>
 
     </LinearLayout>
 
@@ -95,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:text="Ghi chú"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="16sp"
             android:padding="10dp"/>
         <EditText
@@ -106,7 +107,8 @@
             android:background="@android:color/transparent"
             android:hint="Chưa nhập vào"
             android:textSize="16sp"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:textColor="#FFFFFF"/>
         </LinearLayout>
 
 
@@ -121,7 +123,7 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="16dp"
             android:text="Tiền chi"
-            android:textColor="@android:color/black"
+            android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:padding="10dp"/>
         <EditText
@@ -132,6 +134,7 @@
             android:background="@android:color/transparent"
             android:inputType="numberDecimal"
             android:text="0"
+            android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:padding="10dp"/>
     </LinearLayout>
@@ -145,7 +148,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:text="Danh mục"
-        android:textColor="@android:color/black"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:padding="10dp"/>
 
@@ -188,6 +191,6 @@
         android:layout_margin="16dp"
         android:text="Nhập khoản chi"
         android:textSize="16sp"
-        android:backgroundTint="#FFA500"
+        android:backgroundTint="#4E4E4E"
         android:textColor="@android:color/white"/>
 </LinearLayout>

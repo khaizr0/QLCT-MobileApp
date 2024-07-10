@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    android:background="#FFFFFF"
+    android:background="#45454545"
     tools:context=".Activity.SearchActivity">
 
     <!-- Top Bar -->
@@ -13,7 +13,7 @@
         android:id="@+id/topBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="#000000"
         android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,38 +32,30 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <!-- Title -->
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lịch"
-            android:textColor="#FFA500"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@id/backIcon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="8dp"/>
 
         <!-- Search Title -->
+
+        <!-- Share Icon -->
+
         <TextView
             android:id="@+id/searchTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
             android:text="Tìm Kiếm (Toàn thời gian)"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@id/title"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/shareIcon"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
-        <!-- Share Icon -->
         <ImageView
             android:id="@+id/shareIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_share"
+            android:src="@drawable/baseline_ios_share_24"
             android:contentDescription="Share"
             app:layout_constraintEnd_toStartOf="@id/calendarIcon"
             app:layout_constraintTop_toTopOf="parent"
@@ -75,7 +67,7 @@
             android:id="@+id/calendarIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_calendar"
+            android:src="@drawable/baseline_calendar_month_24"
             android:contentDescription="Calendar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -90,7 +82,8 @@
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/topBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/square_corner_background">
 
         <ImageView
             android:id="@+id/searchIcon"
@@ -141,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thu nhập"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="14sp"/>
 
             <TextView
@@ -166,7 +159,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Chi phí"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="14sp"/>
 
             <TextView
@@ -191,7 +184,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tổng"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="14sp"/>
 
             <TextView
