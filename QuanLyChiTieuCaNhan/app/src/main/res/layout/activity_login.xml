@@ -47,7 +47,6 @@
             android:hint="Enter your username"
             android:inputType="text"
             android:textColor="#FFFFFF"
-            android:hintTextColor="#888888"
             android:backgroundTint="#FFFFFF" />
     </LinearLayout>
 
@@ -72,7 +71,6 @@
             android:hint="Enter your password"
             android:inputType="textPassword"
             android:textColor="#FFFFFF"
-            android:hintTextColor="#888888"
             android:backgroundTint="#FFFFFF" />
     </LinearLayout>
 

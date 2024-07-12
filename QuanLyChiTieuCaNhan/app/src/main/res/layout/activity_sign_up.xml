@@ -39,7 +39,6 @@
             android:hint="Nhập tên đăng nhập của bạn"
             android:inputType="text"
             android:textColor="#FFFFFF"
-            android:hintTextColor="#888888"
             android:backgroundTint="#FFFFFF" />
     </LinearLayout>
 
@@ -64,7 +63,6 @@
             android:hint="Nhập mật khẩu của bạn"
             android:inputType="textPassword"
             android:textColor="#FFFFFF"
-            android:hintTextColor="#888888"
             android:backgroundTint="#FFFFFF" />
     </LinearLayout>
 
@@ -94,7 +92,6 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
                 android:hint="Nhập email của bạn"
-                android:hintTextColor="#888888"
                 android:inputType="text"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
@@ -114,7 +111,6 @@
             android:hint="Nhập sđt của bạn"
             android:inputType="text"
             android:textColor="#FFFFFF"
-            android:hintTextColor="#888888"
             android:backgroundTint="#FFFFFF" />
     </LinearLayout>
 

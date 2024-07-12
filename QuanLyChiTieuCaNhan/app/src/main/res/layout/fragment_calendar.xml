@@ -114,45 +114,5 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"/>
 
-    <!-- Navigation Buttons -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="16dp"
-        android:weightSum="4">
 
-        <Button
-            android:id="@+id/buttonInput"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Nhập vào"
-            android:backgroundTint="#FFA500"/>
-
-        <Button
-            android:id="@+id/buttonCalendar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Lịch"
-            android:backgroundTint="#FFA500"/>
-
-        <Button
-            android:id="@+id/buttonReport"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Báo cáo"
-            android:backgroundTint="#FFA500"/>
-
-        <Button
-            android:id="@+id/buttonMore"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Khác"
-            android:backgroundTint="#FFA500"/>
-    </LinearLayout>
 </LinearLayout>
