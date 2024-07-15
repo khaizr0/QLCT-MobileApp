@@ -1,5 +1,6 @@
 package ltdd1.teamvanphong.quanlychitieucanhan.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import ltdd1.teamvanphong.quanlychitieucanhan.Activity.DanhMuc;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class OtherSettingFragment extends Fragment {
@@ -59,6 +61,14 @@ public class OtherSettingFragment extends Fragment {
                 navigateToFragment(new Other_xuat_data());
             }
         });
+        layoutCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DanhMuc.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 

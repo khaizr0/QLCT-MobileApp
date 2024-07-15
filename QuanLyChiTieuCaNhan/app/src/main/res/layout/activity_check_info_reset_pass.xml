@@ -36,9 +36,9 @@
             android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
             android:inputType="text"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#FFFFFF" />
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
     <LinearLayout
@@ -99,4 +99,5 @@
             android:clickable="true"
             android:focusable="true"/>
     </LinearLayout>
+</LinearLayout>
 </LinearLayout>

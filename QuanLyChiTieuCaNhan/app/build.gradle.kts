@@ -45,7 +45,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:<latest-version>")
-    implementation("com.kizitonwose.calendar:view:<latest-version>")
-    implementation("com.kizitonwose.calendar:compose:<latest-version>")
 
 }
