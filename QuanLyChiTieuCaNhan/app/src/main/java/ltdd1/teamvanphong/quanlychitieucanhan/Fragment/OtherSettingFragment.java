@@ -65,11 +65,10 @@ public class OtherSettingFragment extends Fragment {
         layoutCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ThemDanhMuc.class);
+                Intent intent = new Intent(getActivity(), DanhMuc.class);
                 startActivity(intent);
             }
         });
-
         return view;
     }
 

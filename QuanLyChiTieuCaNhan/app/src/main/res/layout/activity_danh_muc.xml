@@ -1,46 +1,49 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#000000"
-    android:paddingTop="?attr/actionBarSize"
-    tools:context=".Activity.DanhMuc">
+    tools:context=".Activity.DanhMuc"
+    >
 
     <!-- Top Bar -->
     <LinearLayout
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="#000000"
-        android:padding="8dp">
+        android:elevation="4dp"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/ic_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
             android:layout_gravity="center_vertical"
+            android:layout_marginEnd="16dp"
             android:padding="8dp"
-            android:layout_marginEnd="16dp"/>
+            android:src="@drawable/ic_back" />
 
         <LinearLayout
             android:id="@+id/btn_chi_tieu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:orientation="vertical"
             android:background="#4D4D4D"
             android:gravity="center"
-            android:padding="8dp"
-            android:layout_marginEnd="8dp">
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Chi tiêu"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF" />
         </LinearLayout>
 
         <LinearLayout
@@ -48,102 +51,58 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
             android:background="#4D4D4D"
             android:gravity="center"
+            android:orientation="vertical"
             android:padding="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thu nhập"
-                android:textColor="#ffffff"/>
+                android:textColor="#ffffff" />
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Add New Category Bar -->
-    <TextView
+    <!-- Add Category with Icon -->
+    <RelativeLayout
+        android:id="@+id/addCategoryLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thêm danh mục"
-        android:textColor="#ffffff"
-        android:background="#4a4a4a"
         android:padding="16dp"
-        android:layout_marginBottom="2dp"/>
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#1F1F1F">
 
-    <!-- List of Categories -->
-    <LinearLayout
-        android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/addCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thêm danh mục"
+            android:textSize="16sp"
+            android:textColor="#808080"/>
+
+        <ImageView
+            android:id="@+id/addCategoryIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:contentDescription="Add Category"
+            android:src="@drawable/ic_next" />
+    </RelativeLayout>
+
+    <!-- RecyclerView for categories -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoryList"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:background="#333333">
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/addCategoryLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#45454545"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:background="#4a4a4a"
-            android:layout_marginBottom="8dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_next"
-                android:layout_marginEnd="16dp"
-                app:tint="#ff0000" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ăn uống"
-                android:textColor="#ffffff"
-                android:layout_gravity="center_vertical"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:background="#4a4a4a"
-            android:layout_marginBottom="8dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_next"
-                android:layout_marginEnd="16dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Y tế"
-                android:textColor="#ffffff"
-                android:layout_gravity="center_vertical"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:background="#4a4a4a"
-            android:layout_marginBottom="8dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_next"
-                android:layout_marginEnd="16dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đi lại"
-                android:textColor="#ffffff"
-                android:layout_gravity="center_vertical"/>
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
