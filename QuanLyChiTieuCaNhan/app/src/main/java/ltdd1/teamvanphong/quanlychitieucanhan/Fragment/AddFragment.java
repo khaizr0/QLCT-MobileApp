@@ -31,13 +31,13 @@ public class AddFragment extends Fragment {
         editTextDate = view.findViewById(R.id.editTextDate);
 
 
-        loadEditText();
+        loadEditTextDate();
         editTextDate.setOnClickListener(v -> showDatePickerDialog());
 
         return view;
     }
 
-    void loadEditText()
+    void loadEditTextDate()
     {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");;

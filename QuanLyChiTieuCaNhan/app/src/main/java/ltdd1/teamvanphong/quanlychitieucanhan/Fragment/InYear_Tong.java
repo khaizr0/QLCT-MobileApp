@@ -7,6 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
@@ -58,9 +63,24 @@ public class InYear_Tong extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_in_year__tong, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_in_year__tong, container, false);
+
+        showYearPickerDialog(view);
+
+        return view;
+    }
+    void showYearPickerDialog(View view){
+        Spinner yearSpinner = view.findViewById(R.id.yearSpinner);
+        ArrayList<String> years = new ArrayList<>();
+
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        for (int i = currentYear + 50; i >= 2000; i--) {
+            years.add(String.valueOf(i));
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, years);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        yearSpinner.setAdapter(adapter);
+        yearSpinner.setSelection(adapter.getPosition(String.valueOf(currentYear)));
     }
 }

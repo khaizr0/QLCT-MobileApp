@@ -57,12 +57,14 @@ public class Other_report_balance extends Fragment {
         ArrayList<String> years = new ArrayList<>();
 
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        for (int i = currentYear; i >= 2000; i--) {
+        for (int i = currentYear + 50; i >= 2000; i--) {
             years.add(String.valueOf(i));
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, years);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearSpinner.setAdapter(adapter);
+        yearSpinner.setSelection(adapter.getPosition(String.valueOf(currentYear)));
+
     }
 }
