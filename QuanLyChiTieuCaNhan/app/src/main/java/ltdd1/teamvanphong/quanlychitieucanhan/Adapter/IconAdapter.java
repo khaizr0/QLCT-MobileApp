@@ -1,4 +1,4 @@
-package ltdd1.teamvanphong.quanlychitieucanhan.Activity.Adapter;
+package ltdd1.teamvanphong.quanlychitieucanhan.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

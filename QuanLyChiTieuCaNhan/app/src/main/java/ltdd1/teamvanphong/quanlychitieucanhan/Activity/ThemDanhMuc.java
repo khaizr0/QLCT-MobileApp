@@ -1,21 +1,14 @@
 package ltdd1.teamvanphong.quanlychitieucanhan.Activity;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ltdd1.teamvanphong.quanlychitieucanhan.Activity.Adapter.IconAdapter;
+import ltdd1.teamvanphong.quanlychitieucanhan.Adapter.IconAdapter;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class ThemDanhMuc extends AppCompatActivity {
