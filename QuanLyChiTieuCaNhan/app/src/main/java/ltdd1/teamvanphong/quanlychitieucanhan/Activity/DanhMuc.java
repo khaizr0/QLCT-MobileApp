@@ -16,7 +16,7 @@ public class DanhMuc extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_them_danh_muc);
+        setContentView(R.layout.activity_danh_muc);
     }
 
 }

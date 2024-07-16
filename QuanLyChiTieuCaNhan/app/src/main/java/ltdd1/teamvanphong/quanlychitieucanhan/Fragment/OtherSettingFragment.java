@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import ltdd1.teamvanphong.quanlychitieucanhan.Activity.DanhMuc;
+import ltdd1.teamvanphong.quanlychitieucanhan.Activity.ThemDanhMuc;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class OtherSettingFragment extends Fragment {
@@ -64,7 +65,7 @@ public class OtherSettingFragment extends Fragment {
         layoutCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DanhMuc.class);
+                Intent intent = new Intent(getActivity(), ThemDanhMuc.class);
                 startActivity(intent);
             }
         });

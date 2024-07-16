@@ -1,4 +1,3 @@
-<!-- activity_icon_selection.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,7 +20,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_back"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="#FFFFFF" />
+            app:tint="#FFFFFF" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,67 +56,56 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
-    <!-- RecyclerView for icon selection -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/icon_recycler_view"
+    <!-- Spinner for icon selection -->
+    <Spinner
+        android:id="@+id/spinner_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_icon_title"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        android:clipToPadding="false"
-        android:paddingBottom="16dp"
-        android:background="#000000"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="4" />
+        android:background="#333333"
+        android:textColor="#FFFFFF"/>
 
     <!-- Color selection title -->
     <TextView
         android:id="@+id/tv_color_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/icon_recycler_view"
+        android:layout_below="@id/spinner_icon"
         android:layout_marginStart="16dp"
         android:text="Màu sắc"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:layout_marginTop="10dp"/>
 
-    <!-- Color selection grid -->
-    <GridLayout
-        android:id="@+id/color_grid"
+    <!-- Spinner for color selection -->
+    <Spinner
+        android:id="@+id/spinner_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_color_title"
         android:layout_margin="16dp"
-        android:columnCount="5"
-        android:orientation="horizontal">
+        android:background="#333333"
+        android:textColor="#FFFFFF"/>
 
-        <!-- Example colors, you can add more as needed -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#FFFFFF"/>
-
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#FF0000"/>
-
-        <!-- Add more Views for the remaining colors -->
-
-    </GridLayout>
+    <!-- Preview for selected icon and color -->
+    <ImageView
+        android:id="@+id/icon_preview"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/spinner_color"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Icon Preview"/>
 
     <!-- Save button -->
     <LinearLayout
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/color_grid"
+        android:layout_below="@id/icon_preview"
         android:layout_margin="16dp"
         android:orientation="vertical"
         android:gravity="center">
