@@ -7,7 +7,7 @@
     android:gravity="center"
     android:padding="16dp"
     android:background="#45454545"
-    tools:context=".Activity.SignUp">
+    tools:context=".Activity.checkInfo_resetPass">
 
     <TextView
         android:layout_width="wrap_content"

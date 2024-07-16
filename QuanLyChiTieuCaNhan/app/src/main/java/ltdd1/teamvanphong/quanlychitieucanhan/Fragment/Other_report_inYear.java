@@ -91,7 +91,7 @@ public class Other_report_inYear extends Fragment {
                 case 2:
                     return new InYear_Tong();
                 default:
-                    return new ReportChartMonthly();
+                    return new InYear_Chitieu();
             }
         }
 
