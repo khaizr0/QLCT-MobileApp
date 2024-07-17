@@ -15,25 +15,41 @@
         android:padding="16dp"
         android:elevation="4dp">
 
-        <Button
-            android:id="@+id/button"
+        <LinearLayout
+            android:id="@+id/linearThuNhap"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="190dp"
-            android:textSize="17sp"
-            android:backgroundTint="@color/gray"
-            android:text="Thu nhập" />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="@color/unselectedColor">
 
-        <Button
-            android:id="@+id/button2"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thu nhập"
+                android:textSize="17sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearChiTieu"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="@color/selectedColor">
 
-            android:textSize="17sp"
-            android:backgroundTint="@color/gray"
-            android:text="Chi tiêu" />
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chi tiêu"
+                android:textSize="17sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
     </RelativeLayout>
 
     <!-- Date Label and Input -->
@@ -61,11 +77,7 @@
             android:clickable="true"
             android:background="@drawable/edit_text_background"
             android:textColor="@color/white"/>
-
-
     </LinearLayout>
-
-
 
     <!-- Note Label and Input -->
     <LinearLayout
@@ -81,7 +93,6 @@
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:padding="10dp"/>
-
         <EditText
             android:id="@+id/editTextNote"
             android:layout_width="250dp"
@@ -93,7 +104,6 @@
             android:background="@drawable/edit_text_background"
             android:textSize="20sp" />
     </LinearLayout>
-
 
     <!-- Amount Label and Input -->
     <LinearLayout
@@ -122,7 +132,6 @@
             android:padding="10dp"/>
     </LinearLayout>
 
-
     <!-- Category Title -->
     <TextView
         android:id="@+id/textViewCategory"
@@ -135,13 +144,11 @@
         android:textSize="20sp"
         android:padding="10dp"/>
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:padding="10dp"
         android:layout_margin="16dp"/>
-
 
     <Button
         android:id="@+id/buttonEnterExpense"

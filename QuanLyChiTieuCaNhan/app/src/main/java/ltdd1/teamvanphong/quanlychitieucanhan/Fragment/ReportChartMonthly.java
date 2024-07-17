@@ -1,7 +1,6 @@
 package ltdd1.teamvanphong.quanlychitieucanhan.Fragment;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.text.SimpleDateFormat;
@@ -26,10 +23,8 @@ public class ReportChartMonthly extends Fragment {
 
     private LinearLayout layoutChiTieu;
     private LinearLayout layoutThuNhap;
-
     private EditText editTextDate;
     private final Calendar calendar = Calendar.getInstance();
-
 
     public ReportChartMonthly() {
         // Required empty public constructor
@@ -37,30 +32,27 @@ public class ReportChartMonthly extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_report_chart_monthly, container, false);
 
         layoutChiTieu = view.findViewById(R.id.layout_chi_tieu);
         layoutThuNhap = view.findViewById(R.id.layout_thu_nhap);
-        addController(view);
+        editTextDate = view.findViewById(R.id.editTextDate);
 
-        // Xử lý sự kiện khi chọn Chi tiêu
         layoutChiTieu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layoutChiTieu.setSelected(true);
-                layoutThuNhap.setSelected(false);
+                layoutChiTieu.setBackgroundColor(getResources().getColor(R.color.selectedColor));
+                layoutThuNhap.setBackgroundColor(getResources().getColor(R.color.unselectedColor));
                 Toast.makeText(getContext(), "Đã chọn Chi tiêu", Toast.LENGTH_SHORT).show();
                 // Xử lý logic khi chọn Chi tiêu
             }
         });
 
-        // Xử lý sự kiện khi chọn Thu nhập
         layoutThuNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layoutChiTieu.setSelected(false);
-                layoutThuNhap.setSelected(true);
+                layoutThuNhap.setBackgroundColor(getResources().getColor(R.color.selectedColor));
+                layoutChiTieu.setBackgroundColor(getResources().getColor(R.color.unselectedColor));
                 Toast.makeText(getContext(), "Đã chọn Thu nhập", Toast.LENGTH_SHORT).show();
                 // Xử lý logic khi chọn Thu nhập
             }
@@ -72,9 +64,8 @@ public class ReportChartMonthly extends Fragment {
         return view;
     }
 
-    private void loadEditTextDate()
-    {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");;
+    private void loadEditTextDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");
         String currentDate = dateFormat.format(calendar.getTime());
         editTextDate.setText(currentDate);
     }
@@ -100,7 +91,7 @@ public class ReportChartMonthly extends Fragment {
         monthYearPicker.setMaxValue(monthYearList.size() - 1);
         monthYearPicker.setDisplayedValues(monthYearArray);
 
-        int initialValue = (currentYear - 1900) * 12 + (currentMonth - 1);
+        int initialValue = (currentYear - 2000) * 12 + (currentMonth - 1);
         monthYearPicker.setValue(initialValue);
 
         builder.setView(view);
@@ -111,8 +102,5 @@ public class ReportChartMonthly extends Fragment {
         });
         builder.setNegativeButton("Hủy", (dialog, which) -> dialog.dismiss());
         builder.create().show();
-    }
-    private void addController(View view){
-        editTextDate = view.findViewById(R.id.editTextDate);
     }
 }

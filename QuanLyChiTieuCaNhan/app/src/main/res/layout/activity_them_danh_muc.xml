@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#000000">
+    android:background="#45454545">
 
     <!-- Top bar with back button and title -->
     <LinearLayout
@@ -66,6 +66,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:background="#333333"
+        android:padding="10dp"
         android:textColor="#FFFFFF"/>
 
     <!-- Color selection title -->
@@ -88,6 +89,7 @@
         android:layout_below="@id/tv_color_title"
         android:layout_margin="16dp"
         android:background="#333333"
+        android:padding="10dp"
         android:textColor="#FFFFFF"/>
 
     <!-- Preview for selected icon and color -->

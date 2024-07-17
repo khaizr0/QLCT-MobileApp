@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#000000">
 
     <!-- Top bar with back button and title -->
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Thêm danh mục"
+            android:text="Sửa danh mục"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:layout_gravity="center"/>
@@ -56,192 +56,56 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
-    <!-- Icon selection RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/icon_recycler_view"
+    <!-- Spinner for icon selection -->
+    <Spinner
+        android:id="@+id/spinner_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_icon_title"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:paddingBottom="16dp"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="4"/>
+        android:background="#333333"
+        android:textColor="#FFFFFF"/>
 
     <!-- Color selection title -->
     <TextView
         android:id="@+id/tv_color_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/icon_recycler_view"
+        android:layout_below="@id/spinner_icon"
         android:layout_marginStart="16dp"
         android:text="Màu sắc"
         android:textColor="#FFFFFF"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"/>
 
-    <!-- Color selection grid -->
-    <GridLayout
-        android:id="@+id/color_grid"
+    <!-- Spinner for color selection -->
+    <Spinner
+        android:id="@+id/spinner_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_color_title"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:columnCount="5"
-        android:orientation="horizontal">
+        android:layout_margin="16dp"
+        android:background="#333333"
+        android:textColor="#FFFFFF"/>
 
-        <!-- Example colors, you can add more as needed -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#FFFFFF"/>
-
-        <!-- Add more Views for the remaining colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#FF0000"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#00FF00"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#0000FF"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#FFFF00"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#00FFFF"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#FF00FF"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#808080"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#800000"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#008000"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#000080"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#C0C0C0"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#FFD700"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#FFA500"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#FF1493"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#8A2BE2"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#00CED1"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#FF4500"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#8B008B"/>
-
-        <!-- Add more Views for additional colors -->
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="4dp"
-            android:background="#2E8B57"/>
-
-    </GridLayout>
+    <!-- Preview for selected icon and color -->
+    <ImageView
+        android:id="@+id/icon_preview"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/spinner_color"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Icon Preview"/>
 
     <!-- Save button -->
     <LinearLayout
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/color_grid"
+        android:layout_below="@id/icon_preview"
         android:layout_margin="16dp"
         android:orientation="vertical"
         android:gravity="center">
@@ -252,7 +116,7 @@
             android:text="Lưu"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:background="#800080"
+            android:background="@color/dimgray"
             android:padding="12dp"
             android:textAlignment="center"/>
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#45454545"
-    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Fragment.ReportChartMonthly">
 
     <!-- Tháng and month picker -->
@@ -35,7 +35,6 @@
             android:clickable="true"
             android:background="@drawable/edit_text_background"
             android:textColor="@color/white"/>
-
     </LinearLayout>
 
     <TableLayout
@@ -93,7 +92,6 @@
             android:background="#555555" />
 
         <TableRow>
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -116,7 +114,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#555555" />
-
     </TableLayout>
 
     <!-- Chi tiêu and Thu nhập buttons -->
@@ -133,7 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/selector_button_background"
+            android:background="@color/selectedColor"
             android:clickable="true"
             android:focusable="true"
             android:padding="8dp"
@@ -147,7 +144,6 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
-
         </LinearLayout>
 
         <!-- Thu nhập -->
@@ -156,7 +152,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/selector_button_background"
+            android:background="@color/unselectedColor"
             android:clickable="true"
             android:focusable="true"
             android:padding="8dp"
@@ -170,10 +166,8 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
-
         </LinearLayout>
     </LinearLayout>
-
 
     <!-- MPChart -->
     <com.github.mikephil.charting.charts.PieChart
@@ -232,7 +226,5 @@
 
         <!-- Repeat similar blocks for other categories -->
         <!-- ... -->
-
     </LinearLayout>
-
 </LinearLayout>
