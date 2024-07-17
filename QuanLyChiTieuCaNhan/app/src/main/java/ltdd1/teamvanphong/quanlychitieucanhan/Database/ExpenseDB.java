@@ -61,7 +61,7 @@ public class ExpenseDB extends SQLiteOpenHelper {
 
         String createIncomeExpenseTable = "CREATE TABLE " + TABLE_INCOME_EXPENSE + " ("
                 + INCOME_EXPENSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + TYPE + " TEXT NOT NULL, "
+                + TYPE + " INTERGER NOT NULL, "
                 + AMOUNT + " TEXT NOT NULL, "
                 + DATE + " TEXT NOT NULL, "
                 + NOTE + " TEXT, "
