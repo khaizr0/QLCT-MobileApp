@@ -2,7 +2,7 @@ package ltdd1.teamvanphong.quanlychitieucanhan.Model;
 
 public class IncomeExpenseModel_khai {
     private int incomeExpenseId;
-    private String type;
+    private int type;
     private String amount;
     private String date;
     private String note;
@@ -17,13 +17,11 @@ public class IncomeExpenseModel_khai {
         this.incomeExpenseId = incomeExpenseId;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    public void setType(int type) { this.type = type;}
 
     public String getAmount() {
         return amount;
