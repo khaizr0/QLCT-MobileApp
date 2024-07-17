@@ -36,14 +36,11 @@ public class Login extends AppCompatActivity {
                 } else {
                     UserModel user = UserModel.checkLogin(Login.this, username, password);
                     if (user != null) {
-                        // Đăng nhập thành công
                         Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                        // Chuyển sang activity khác
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        // Đăng nhập thất bại
                         Toast.makeText(Login.this, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_SHORT).show();
                     }
                 }
