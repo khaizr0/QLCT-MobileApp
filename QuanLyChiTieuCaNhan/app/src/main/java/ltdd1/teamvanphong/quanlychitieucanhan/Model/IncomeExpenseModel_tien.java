@@ -2,7 +2,7 @@ package ltdd1.teamvanphong.quanlychitieucanhan.Model;
 
 public class IncomeExpenseModel_tien {
     private int incomeExpenseId;
-    private int type;
+    private int type; //0 chi tiêu, 1 thu nhập
     private String amount;
     private String date;
     private String note;
