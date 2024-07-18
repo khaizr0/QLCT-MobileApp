@@ -24,6 +24,7 @@ public class DanhMuc extends AppCompatActivity {
     private RecyclerView categoryList;
     private CategoriesAdapter categoriesAdapter;
     private int currentType = 0;  // 0 cho chi tiêu, 1 cho thu nhập
+    private static final int REQUEST_ADD_CATEGORY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +77,20 @@ public class DanhMuc extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DanhMuc.this, ThemDanhMuc.class);
-                startActivity(intent);
+                intent.putExtra("CURRENT_TYPE", currentType);
+                intent.putExtra("USER_ID", getUserId());
+                startActivityForResult(intent, REQUEST_ADD_CATEGORY);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ADD_CATEGORY && resultCode == RESULT_OK) {
+            // Reload category list
+            updateCategoryList();
+        }
     }
 
     private void updateCategoryList() {
@@ -87,16 +99,14 @@ public class DanhMuc extends AppCompatActivity {
     }
 
     private void setButtonSelected(LinearLayout button) {
-        button.setBackgroundResource(R.color.selectedColor); // Update this to your selected button background
+        button.setBackgroundResource(R.color.selectedColor);
     }
 
     private void setButtonUnselected(LinearLayout button) {
-        button.setBackgroundResource(R.color.unselectedColor); // Update this to your unselected button background
+        button.setBackgroundResource(R.color.unselectedColor);
     }
 
     private int getUserId() {
-        // Implement your logic to retrieve the current user ID here
-        // For demonstration purposes, return a mock user ID
         return 1;
     }
 }
