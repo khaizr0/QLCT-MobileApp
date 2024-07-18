@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import ltdd1.teamvanphong.quanlychitieucanhan.Database.ExpenseDB;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class Other_info extends Fragment {
@@ -24,5 +25,14 @@ public class Other_info extends Fragment {
         View view = inflater.inflate(R.layout.activity_other_info, container, false);
 
         return view;
+    }
+
+    //Chức năng ẩn =)))
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ExpenseDB db = new ExpenseDB(getContext());
+        db.printAllIncomeExpense();
     }
 }

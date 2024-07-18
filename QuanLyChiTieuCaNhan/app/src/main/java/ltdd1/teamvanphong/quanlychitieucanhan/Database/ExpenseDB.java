@@ -2,8 +2,10 @@ package ltdd1.teamvanphong.quanlychitieucanhan.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class ExpenseDB extends SQLiteOpenHelper {
     public static final String DB_NAME = "expense.db";
@@ -128,4 +130,26 @@ public class ExpenseDB extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FIXED_INCOME_EXPENSE);
         onCreate(db);
     }
+
+    public void printAllIncomeExpense() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_INCOME_EXPENSE, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(INCOME_EXPENSE_ID));
+                int type = cursor.getInt(cursor.getColumnIndexOrThrow(TYPE));
+                String amount = cursor.getString(cursor.getColumnIndexOrThrow(AMOUNT));
+                String date = cursor.getString(cursor.getColumnIndexOrThrow(DATE));
+                String note = cursor.getString(cursor.getColumnIndexOrThrow(NOTE));
+                int userId = cursor.getInt(cursor.getColumnIndexOrThrow(USER_ID));
+                int categoryId = cursor.getInt(cursor.getColumnIndexOrThrow(CATEGORY_ID));
+
+                Log.d("IncomeExpense", "ID: " + id + ", Type: " + type + ", Amount: " + amount +
+                        ", Date: " + date + ", Note: " + note + ", UserID: " + userId + ", CategoryID: " + categoryId);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+    }
+
 }
