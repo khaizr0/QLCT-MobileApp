@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +26,7 @@ import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class CalendarFragment extends Fragment {
 
+    private TextView txtIncome, txtExpense, txtTotal ;
     private Spinner monthSpinner;
     private RecyclerView calendarRecyclerView;
     private CalendarAdapter calendarAdapter;
@@ -37,6 +40,10 @@ public class CalendarFragment extends Fragment {
 
         monthSpinner = view.findViewById(R.id.monthSpinner);
         calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
+        txtIncome = view.findViewById(R.id.txtImcome);
+        txtExpense = view.findViewById(R.id.txtExpense);
+        txtTotal = view.findViewById(R.id.txtTotal);
+
 
         setupMonthSpinner();
         setupCalendarRecyclerView();
@@ -51,7 +58,7 @@ public class CalendarFragment extends Fragment {
         List<String> dateOptions = new ArrayList<>();
         for (int year = 2000; year <= currentYear + 50; year++) {
             for (int month = 1; month <= 12; month++) {
-                dateOptions.add(String.format("%02d/%04d", month + 1, year));
+                dateOptions.add(String.format("%02d/%04d", month , year));
             }
         }
 
@@ -91,6 +98,7 @@ public class CalendarFragment extends Fragment {
         List<IncomeExpenseModel_nguyen> incomeExpenseList = model.getIncomeExpensesByMonth(session.getUserId(), month, year);
 
         List<CalendarDay> days = new ArrayList<>();
+        Log.d("incomeExpenseList", "Giá trị của biến: " + incomeExpenseList);
 
         // Initialize days array with empty data for proper calendar view
         calendar.set(Calendar.MONTH, month - 1);
@@ -105,20 +113,31 @@ public class CalendarFragment extends Fragment {
             days.add(new CalendarDay(String.valueOf(i), "", ""));
         }
 
+        double totalIncome = 0;
+        double totalExpense = 0;
+
         // Populate income and expense data
         for (IncomeExpenseModel_nguyen item : incomeExpenseList) {
             String[] dateParts = item.getDate().split("-");
             int day = Integer.parseInt(dateParts[2]);
             CalendarDay dayData = days.get(firstDayOfWeek + day - 1);
+            double amount = Double.parseDouble(item.getAmount());
             if (item.getType() == 1) {
                 dayData.setIncome(item.getAmount());
+                totalIncome += amount;
             } else {
                 dayData.setExpense(item.getAmount());
+                totalExpense += amount;
             }
         }
 
         calendarAdapter.setDays(days);
+
+        txtIncome.setText(String.format("%.0fđ", totalIncome));
+        txtExpense.setText(String.format("%.0fđ", totalExpense));
+        txtTotal.setText(String.format("%.0fđ", totalIncome - totalExpense));
     }
+
 
 
 }
