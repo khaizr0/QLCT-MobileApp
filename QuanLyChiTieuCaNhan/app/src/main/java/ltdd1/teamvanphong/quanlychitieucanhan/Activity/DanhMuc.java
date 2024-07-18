@@ -7,14 +7,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ltdd1.teamvanphong.quanlychitieucanhan.Activity.ThemDanhMuc;
 import ltdd1.teamvanphong.quanlychitieucanhan.Adapter.CategoriesAdapter;
 import ltdd1.teamvanphong.quanlychitieucanhan.Model.CategoriesModel;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
@@ -30,7 +28,6 @@ public class DanhMuc extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_danh_muc);
 
         btnChiTieu = findViewById(R.id.btn_chi_tieu);
@@ -39,7 +36,7 @@ public class DanhMuc extends AppCompatActivity {
 
         // Set up RecyclerView
         categoryList.setLayoutManager(new LinearLayoutManager(this));
-        categoriesAdapter = new CategoriesAdapter(this, CategoriesModel.getCategoriesByType(this, currentType));
+        categoriesAdapter = new CategoriesAdapter(this, CategoriesModel.getCategoriesByTypeAndUserId(this, currentType, getUserId()));
         categoryList.setAdapter(categoriesAdapter);
 
         // Mặc định chọn "Chi tiêu"
@@ -85,7 +82,7 @@ public class DanhMuc extends AppCompatActivity {
     }
 
     private void updateCategoryList() {
-        List<CategoriesModel> categoryListData = CategoriesModel.getCategoriesByType(this, currentType);
+        List<CategoriesModel> categoryListData = CategoriesModel.getCategoriesByTypeAndUserId(this, currentType, getUserId());
         categoriesAdapter.setCategoryList(categoryListData);
     }
 
@@ -95,5 +92,11 @@ public class DanhMuc extends AppCompatActivity {
 
     private void setButtonUnselected(LinearLayout button) {
         button.setBackgroundResource(R.color.unselectedColor); // Update this to your unselected button background
+    }
+
+    private int getUserId() {
+        // Implement your logic to retrieve the current user ID here
+        // For demonstration purposes, return a mock user ID
+        return 1;
     }
 }
