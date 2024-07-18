@@ -68,28 +68,28 @@ public class IncomeExpenseModel_nguyen {
     }
 
 
-    public List<CalendarDay> aggregateIncomeExpenses(List<IncomeExpenseModel_nguyen> incomeExpenseList) {
-        Map<String, CalendarDay> dailyMap = new HashMap<>();
-
-        for (IncomeExpenseModel_nguyen item : incomeExpenseList) {
-            String date = item.getDate();
-            double amount = Double.parseDouble(item.getAmount());
-
-            CalendarDay dailyIncomeExpense = dailyMap.get(date);
-            if (dailyIncomeExpense == null) {
-                dailyIncomeExpense = new CalendarDay(date, 0, 0);
-                dailyMap.put(date, dailyIncomeExpense);
-            }
-
-            if (item.getType() == 1) {
-                dailyIncomeExpense.setIncome(dailyIncomeExpense.getIncome() + amount);
-            } else {
-                dailyIncomeExpense.setExpense(dailyIncomeExpense.getExpense() + amount);
-            }
-        }
-
-        return new ArrayList<>(dailyMap.values());
-    }
+//    public List<CalendarDay> aggregateIncomeExpenses(List<IncomeExpenseModel_nguyen> incomeExpenseList) {
+//        Map<String, CalendarDay> dailyMap = new HashMap<>();
+//
+//        for (IncomeExpenseModel_nguyen item : incomeExpenseList) {
+//            String date = item.getDate();
+//            double amount = Double.parseDouble(item.getAmount());
+//
+//            CalendarDay dailyIncomeExpense = dailyMap.get(date);
+//            if (dailyIncomeExpense == null) {
+//                dailyIncomeExpense = new CalendarDay(date, 0, 0);
+//                dailyMap.put(date, dailyIncomeExpense);
+//            }
+//
+//            if (item.getType() == 1) {
+//                dailyIncomeExpense.setIncome(dailyIncomeExpense.getIncome() + amount);
+//            } else {
+//                dailyIncomeExpense.setExpense(dailyIncomeExpense.getExpense() + amount);
+//            }
+//        }
+//
+//        return new ArrayList<>(dailyMap.values());
+//    }
 
 
 
