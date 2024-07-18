@@ -2,12 +2,15 @@ package ltdd1.teamvanphong.quanlychitieucanhan.Adapter;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import ltdd1.teamvanphong.quanlychitieucanhan.Model.CategoriesModel;
@@ -39,8 +42,30 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, @SuppressLint("RecyclerView") int position) {
         CategoriesModel category = categories.get(position);
         holder.textViewCategoryName.setText(category.getCategoryName());
-        holder.imageViewIcon.setColorFilter(Color.parseColor(category.getColor()));
-        holder.itemView.setBackgroundColor(selectedPosition == position ? Color.WHITE : Color.TRANSPARENT);
+
+        // Set icon with color background
+        try {
+            int color = Color.parseColor(category.getColor());
+            holder.imageViewIcon.setColorFilter(color);
+        } catch (IllegalArgumentException e) {
+            Log.e("CategoryAdapter", "Invalid color code: " + category.getColor());
+        }
+
+        // Load drawable resource
+        int iconResId = holder.itemView.getContext().getResources().getIdentifier(category.getIconName(), "drawable", holder.itemView.getContext().getPackageName());
+        Drawable iconDrawable = ContextCompat.getDrawable(holder.itemView.getContext(), iconResId);
+        if (iconDrawable != null) {
+            holder.imageViewIcon.setImageDrawable(iconDrawable);
+        } else {
+            Log.e("CategoryAdapter", "Icon resource not found for: " + category.getIconName());
+        }
+
+        // Set background color for selected item
+        if (selectedPosition == position) {
+            holder.itemView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.selected_border));
+        } else {
+            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+        }
 
         holder.itemView.setOnClickListener(v -> {
             selectedPosition = position;
@@ -48,6 +73,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             listener.onItemClick(category);
         });
     }
+
 
     @Override
     public int getItemCount() {
