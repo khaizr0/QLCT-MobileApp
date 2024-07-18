@@ -122,4 +122,22 @@ public class UserModel {
         db.close();
         return rows > 0;
     }
+
+    //Đăng kí:
+    public static boolean registerUser(Context context, String userName, String email, String password, int gender, String phone) {
+        SQLiteOpenHelper dbHelper = new ExpenseDB(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("UserName", userName);
+        values.put("Email", email);
+        values.put("PassWork", password);
+        values.put("Gender", gender);
+        values.put("Sdt", phone);
+
+        long result = db.insert("User", null, values);
+        db.close();
+
+        return result != -1; // Return true if insert was successful
+    }
 }

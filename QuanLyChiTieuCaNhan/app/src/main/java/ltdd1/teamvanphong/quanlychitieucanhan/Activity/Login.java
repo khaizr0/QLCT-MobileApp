@@ -18,7 +18,7 @@ import ltdd1.teamvanphong.quanlychitieucanhan.R;
 public class Login extends AppCompatActivity {
     private EditText editTextUsername, editTextPassword;
     private Button buttonLogin;
-    private TextView textViewForgotPassword;
+    private TextView textViewForgotPassword, textViewRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +28,7 @@ public class Login extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
         textViewForgotPassword = findViewById(R.id.textViewForgotPassword);
+        textViewRegister = findViewById(R.id.textViewRegister);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +56,13 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Login.this, checkInfo_resetPass.class);
+                startActivity(intent);
+            }
+        });
+        textViewRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, SignUp.class);
                 startActivity(intent);
             }
         });
