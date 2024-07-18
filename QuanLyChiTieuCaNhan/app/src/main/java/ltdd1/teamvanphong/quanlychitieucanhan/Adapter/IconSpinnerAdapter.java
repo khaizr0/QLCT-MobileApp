@@ -47,4 +47,3 @@ public class IconSpinnerAdapter extends ArrayAdapter<IconItem> {
         return convertView;
     }
 }
-

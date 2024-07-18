@@ -17,4 +17,3 @@ public class IconItem {
         return name;
     }
 }
-

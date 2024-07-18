@@ -48,4 +48,3 @@ public class ColorSpinnerAdapter extends ArrayAdapter<ColorItem> {
         return convertView;
     }
 }
-

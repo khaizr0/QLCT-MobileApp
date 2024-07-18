@@ -1,6 +1,7 @@
 package ltdd1.teamvanphong.quanlychitieucanhan.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import ltdd1.teamvanphong.quanlychitieucanhan.Activity.SuaDanhMuc;
 import ltdd1.teamvanphong.quanlychitieucanhan.Model.CategoriesModel;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
@@ -47,6 +49,22 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         int iconResId = context.getResources().getIdentifier(category.getIconName(), "drawable", context.getPackageName());
         Drawable iconDrawable = ContextCompat.getDrawable(context, iconResId);
         holder.icon.setImageDrawable(iconDrawable);
+
+        // Set click listener
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create intent to send data to SuaDanhMuc activity
+                Intent intent = new Intent(context, SuaDanhMuc.class);
+                intent.putExtra("CATEGORY_ID", category.getCategoryId());
+                intent.putExtra("CATEGORY_NAME", category.getCategoryName());
+                intent.putExtra("CATEGORY_ICON", category.getIconName());
+                intent.putExtra("CATEGORY_COLOR", category.getColor());
+                intent.putExtra("CATEGORY_TYPE", category.getType());
+                intent.putExtra("USER_ID", category.getUserId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
