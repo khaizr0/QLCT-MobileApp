@@ -133,9 +133,8 @@ public class AddFragment extends Fragment {
         String note = editTextNote.getText().toString();
         String amount = editTextAmount.getText().toString();
 
-        // Xử lý nếu ghi chú là rỗng
         if (note.isEmpty()) {
-            note = ""; // hoặc có thể để null tùy theo cấu trúc của IncomeExpenseModel_khai
+            note = "";
         }
 
         if (date.isEmpty() || amount.isEmpty() || selectedCategoryId == -1) {
@@ -146,7 +145,7 @@ public class AddFragment extends Fragment {
         IncomeExpenseModel_khai incomeExpense = new IncomeExpenseModel_khai();
         incomeExpense.setType(selectedType);
         incomeExpense.setDate(date);
-        incomeExpense.setNote(note); // Gán ghi chú đã xử lý
+        incomeExpense.setNote(note);
         incomeExpense.setAmount(amount);
         incomeExpense.setUserId(userId);
         incomeExpense.setCategoryId(selectedCategoryId);
@@ -180,5 +179,4 @@ public class AddFragment extends Fragment {
         db.insert("IncomeExpense", null, values);
         db.close();
     }
-
 }
