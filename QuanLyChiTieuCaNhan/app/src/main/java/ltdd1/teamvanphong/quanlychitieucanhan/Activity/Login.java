@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
                 } else {
                     UserModel user = UserModel.checkLogin(Login.this, username, password);
                     if (user != null) {
-                        saveUserInSession(user);
+                        UserModel.setSessionUser(user);
                         Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
@@ -59,15 +59,5 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-    private void saveUserInSession(UserModel user) {
-        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("userId", user.getUserId());
-        editor.putString("username", user.getUserName());
-        editor.putString("email", user.getEmail());
-        editor.putString("password", user.getPassword());
-        editor.putInt("gender", user.getGender());
-        editor.putString("phone", user.getPhone());
-        editor.apply();
-    }
+
 }

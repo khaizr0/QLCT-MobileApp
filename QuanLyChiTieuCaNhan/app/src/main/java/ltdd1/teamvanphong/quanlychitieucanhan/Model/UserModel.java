@@ -5,10 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import ltdd1.teamvanphong.quanlychitieucanhan.Database.ExpenseDB;
 
 public class UserModel {
+    private static UserModel session;
+
     private int userId;
     private String userName;
     private String email;
@@ -16,7 +19,18 @@ public class UserModel {
     private int gender;
     private String phone;
 
-    public int getUserId() { return userId; }
+    public UserModel(){
+
+    }
+    public static UserModel getSessionUser() {
+        return session;
+    }
+    public static void setSessionUser(UserModel user) {
+        session = user;
+    }
+    public int getUserId() {
+        Log.d("getUserID", "getUserId: "+userId);
+        return userId; }
 
     public void setUserId(int userId) {
         this.userId = userId;

@@ -33,7 +33,8 @@ public class CalendarFragment extends Fragment {
     private Calendar calendar = Calendar.getInstance();
     private int currentYear = calendar.get(Calendar.YEAR);
     private int currentMonth = calendar.get(Calendar.MONTH) + 1;
-    private UserModel session = new UserModel();
+    UserModel session = UserModel.getSessionUser();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
@@ -95,10 +96,13 @@ public class CalendarFragment extends Fragment {
         int year = Integer.parseInt(parts[1]);
 
         IncomeExpenseModel_nguyen model = new IncomeExpenseModel_nguyen(requireContext());
-        List<IncomeExpenseModel_nguyen> incomeExpenseList = model.getIncomeExpensesByMonth(session.getUserId(), month, year);
+
+        int userId = session.getUserId();
+
+        List<IncomeExpenseModel_nguyen> incomeExpenseList = model.getIncomeExpensesByMonth(userId, month, year);
 
         List<CalendarDay> days = new ArrayList<>();
-        Log.d("incomeExpenseList", "Giá trị của biến: " + incomeExpenseList);
+        Log.d("userID", "Giá trị của biến: " + userId);
 
         // Initialize days array with empty data for proper calendar view
         calendar.set(Calendar.MONTH, month - 1);
