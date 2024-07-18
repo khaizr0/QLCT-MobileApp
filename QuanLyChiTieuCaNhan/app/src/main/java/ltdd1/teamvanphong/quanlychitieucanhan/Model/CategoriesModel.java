@@ -1,6 +1,5 @@
 package ltdd1.teamvanphong.quanlychitieucanhan.Model;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -36,10 +35,14 @@ public class CategoriesModel {
     public void setUserId(int userId) { this.userId = userId; }
 
     // Hàm lấy danh sách danh mục từ database theo Type và UserId
-    public static List<CategoriesModel> getCategoriesByTypeAndUserId(Context context, int type, int userId) {
+    public static List<CategoriesModel> getCategoriesByTypeAndUserId(Context context, int type) {
         List<CategoriesModel> categoryList = new ArrayList<>();
         SQLiteOpenHelper dbHelper = new ExpenseDB(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        // Lấy userId từ session
+        UserModel session = UserModel.getSessionUser();
+        int userId = session.getUserId();
 
         Cursor cursor = db.query("Categories", null, "Type=? AND UserID=?", new String[]{String.valueOf(type), String.valueOf(userId)}, null, null, null);
 

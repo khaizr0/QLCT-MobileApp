@@ -15,6 +15,7 @@ import java.util.List;
 
 import ltdd1.teamvanphong.quanlychitieucanhan.Adapter.CategoriesAdapter;
 import ltdd1.teamvanphong.quanlychitieucanhan.Model.CategoriesModel;
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.UserModel;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class DanhMuc extends AppCompatActivity {
@@ -25,11 +26,16 @@ public class DanhMuc extends AppCompatActivity {
     private CategoriesAdapter categoriesAdapter;
     private int currentType = 0;  // 0 cho chi tiêu, 1 cho thu nhập
     private static final int REQUEST_ADD_CATEGORY = 1;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danh_muc);
+
+        // Lấy userId từ session
+        UserModel session = UserModel.getSessionUser();
+        userId = session.getUserId();
 
         btnChiTieu = findViewById(R.id.btn_chi_tieu);
         btnThuNhap = findViewById(R.id.btn_thu_nhap);
@@ -37,7 +43,7 @@ public class DanhMuc extends AppCompatActivity {
 
         // Set up RecyclerView
         categoryList.setLayoutManager(new LinearLayoutManager(this));
-        categoriesAdapter = new CategoriesAdapter(this, CategoriesModel.getCategoriesByTypeAndUserId(this, currentType, getUserId()));
+        categoriesAdapter = new CategoriesAdapter(this, CategoriesModel.getCategoriesByTypeAndUserId(this, currentType));
         categoryList.setAdapter(categoriesAdapter);
 
         // Mặc định chọn "Chi tiêu"
@@ -78,7 +84,7 @@ public class DanhMuc extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DanhMuc.this, ThemDanhMuc.class);
                 intent.putExtra("CURRENT_TYPE", currentType);
-                intent.putExtra("USER_ID", getUserId());
+                intent.putExtra("USER_ID", userId);
                 startActivityForResult(intent, REQUEST_ADD_CATEGORY);
             }
         });
@@ -94,7 +100,7 @@ public class DanhMuc extends AppCompatActivity {
     }
 
     private void updateCategoryList() {
-        List<CategoriesModel> categoryListData = CategoriesModel.getCategoriesByTypeAndUserId(this, currentType, getUserId());
+        List<CategoriesModel> categoryListData = CategoriesModel.getCategoriesByTypeAndUserId(this, currentType);
         categoriesAdapter.setCategoryList(categoryListData);
     }
 
@@ -104,9 +110,5 @@ public class DanhMuc extends AppCompatActivity {
 
     private void setButtonUnselected(LinearLayout button) {
         button.setBackgroundResource(R.color.unselectedColor);
-    }
-
-    private int getUserId() {
-        return 1;
     }
 }

@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -118,7 +117,7 @@ public class AddFragment extends Fragment {
     }
 
     private void loadCategories() {
-        List<CategoriesModel> categories = CategoriesModel.getCategoriesByTypeAndUserId(getContext(), selectedType, userId);
+        List<CategoriesModel> categories = CategoriesModel.getCategoriesByTypeAndUserId(getContext(), selectedType);
         categoryAdapter = new CategoryAdapter(categories, new CategoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(CategoriesModel category) {
@@ -154,8 +153,6 @@ public class AddFragment extends Fragment {
 
         Toast.makeText(getContext(), "Đã lưu thông tin", Toast.LENGTH_SHORT).show();
     }
-
-
 
     private void saveIncomeExpenseToDatabase(IncomeExpenseModel_khai incomeExpense) {
         ExpenseDB dbHelper = new ExpenseDB(getContext());
