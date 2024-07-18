@@ -152,4 +152,21 @@ public class ExpenseDB extends SQLiteOpenHelper {
         cursor.close();
     }
 
+    // Public static methods to access private fields
+    public static String getTableIncomeExpense() {
+        return TABLE_INCOME_EXPENSE;
+    }
+
+    public static String getAmount() {
+        return AMOUNT;
+    }
+
+    public static String getDate() {
+        return DATE;
+    }
+
+    public static String getType() {
+        return TYPE;
+    }
+
 }
