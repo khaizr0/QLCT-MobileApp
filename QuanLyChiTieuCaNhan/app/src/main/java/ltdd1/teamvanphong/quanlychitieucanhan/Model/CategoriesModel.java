@@ -43,7 +43,7 @@ public class CategoriesModel {
     public void setUserId(int userId) { this.userId = userId; }
 
 
-    public List<String> getExpenseCategoriesForUser(int userId, int month, int year) {
+    public List<String> getExpenseOrIncomeCategoriesForUser(int userId, int month, int year, int type) {
         List<String> categories = new ArrayList<>();
         String startDate = String.format("%04d-%02d-01", year, month);
         String endDate = String.format("%04d-%02d-31", year, month);
@@ -51,8 +51,8 @@ public class CategoriesModel {
         String query = "SELECT DISTINCT C.CategoryName " +
                 "FROM IncomeExpense IE " +
                 "JOIN Categories C ON IE.CategoryID = C.CategoryID " +
-                "WHERE IE.UserID = ? AND IE.Type = 0 AND IE.Date BETWEEN ? AND ?";
-        Cursor cursor = database.rawQuery(query, new String[]{String.valueOf(userId), startDate, endDate});
+                "WHERE IE.UserID = ? AND IE.Type = ? AND IE.Date BETWEEN ? AND ?";
+        Cursor cursor = database.rawQuery(query, new String[]{String.valueOf(userId),String.valueOf(type), startDate, endDate});
 
         if (cursor.moveToFirst()) {
             do {

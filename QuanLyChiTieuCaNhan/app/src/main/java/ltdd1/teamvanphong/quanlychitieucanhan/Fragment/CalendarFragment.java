@@ -110,10 +110,21 @@ public class CalendarFragment extends Fragment {
 
         List<IncomeExpenseModel_nguyen> incomeExpenseList = model.getIncomeExpensesByMonth(userId, month, year);
 
-        List<CalendarDay> days = new ArrayList<>();
-        Log.d("userID", "Giá trị của biến: " + userId);
+        Map<String, double[]> dailyIncomeExpenseMap = new HashMap<>();
+        for (IncomeExpenseModel_nguyen item : incomeExpenseList) {
+            String date = item.getDate();
+            double amount = Double.parseDouble(item.getAmount());
+            if (!dailyIncomeExpenseMap.containsKey(date)) {
+                dailyIncomeExpenseMap.put(date, new double[]{0, 0});
+            }
+            if (item.getType() == 1) {
+                dailyIncomeExpenseMap.get(date)[0] += amount;
+            } else {
+                dailyIncomeExpenseMap.get(date)[1] += amount;
+            }
+        }
 
-        // Initialize days array with empty data for proper calendar view
+        List<CalendarDay> days = new ArrayList<>();
         calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
@@ -123,25 +134,19 @@ public class CalendarFragment extends Fragment {
             days.add(new CalendarDay("", "", ""));
         }
         for (int i = 1; i <= daysInMonth; i++) {
-            days.add(new CalendarDay(String.valueOf(i), "", ""));
+            String date = String.format("%04d-%02d-%02d", year, month, i);
+            String income = dailyIncomeExpenseMap.containsKey(date) && dailyIncomeExpenseMap.get(date)[0] != 0 ?
+                    String.format("%.0f", dailyIncomeExpenseMap.get(date)[0]) : "";
+            String expense = dailyIncomeExpenseMap.containsKey(date) && dailyIncomeExpenseMap.get(date)[1] != 0 ?
+                    String.format("%.0f", dailyIncomeExpenseMap.get(date)[1]) : "";
+            days.add(new CalendarDay(String.valueOf(i), income, expense));
         }
 
         double totalIncome = 0;
         double totalExpense = 0;
-
-        // Populate income and expense data
-        for (IncomeExpenseModel_nguyen item : incomeExpenseList) {
-            String[] dateParts = item.getDate().split("-");
-            int day = Integer.parseInt(dateParts[2]);
-            CalendarDay dayData = days.get(firstDayOfWeek + day - 1);
-            double amount = Double.parseDouble(item.getAmount());
-            if (item.getType() == 1) {
-                dayData.setIncome(item.getAmount());
-                totalIncome += amount;
-            } else {
-                dayData.setExpense(item.getAmount());
-                totalExpense += amount;
-            }
+        for (double[] values : dailyIncomeExpenseMap.values()) {
+            totalIncome += values[0];
+            totalExpense += values[1];
         }
 
         calendarAdapter.setDays(days);
@@ -150,6 +155,8 @@ public class CalendarFragment extends Fragment {
         txtExpense.setText(String.format("%.0fđ", totalExpense));
         txtTotal.setText(String.format("%.0fđ", totalIncome - totalExpense));
     }
+
+
     private void updateListView() {
         String selectedDate = (String) monthSpinner.getSelectedItem();
         String[] parts = selectedDate.split("/");

@@ -48,6 +48,8 @@ public class ReportChartMonthly extends Fragment {
     private CategoriesModel categoriesModel;
     private UserModel session;
 
+    private int type;
+
     public ReportChartMonthly() {
         // Required empty public constructor
     }
@@ -73,13 +75,18 @@ public class ReportChartMonthly extends Fragment {
         txtTotalIncomeExpense = view.findViewById(R.id.txtTotalIncomeExpense);
         pieChart = view.findViewById(R.id.pie_chart);
 
+
         layoutChiTieu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 layoutChiTieu.setBackgroundColor(getResources().getColor(R.color.selectedColor));
                 layoutThuNhap.setBackgroundColor(getResources().getColor(R.color.unselectedColor));
                 Toast.makeText(getContext(), "Đã chọn Chi tiêu", Toast.LENGTH_SHORT).show();
-                // Xử lý logic khi chọn Chi tiêu
+
+                type = 0;
+
+                loadTxtView();
+                loadEditTextDate();
             }
         });
         layoutThuNhap.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +95,11 @@ public class ReportChartMonthly extends Fragment {
                 layoutThuNhap.setBackgroundColor(getResources().getColor(R.color.selectedColor));
                 layoutChiTieu.setBackgroundColor(getResources().getColor(R.color.unselectedColor));
                 Toast.makeText(getContext(), "Đã chọn Thu nhập", Toast.LENGTH_SHORT).show();
-                // Xử lý logic khi chọn Thu nhập
+
+                type = 1;
+
+                loadTxtView();
+                loadEditTextDate();
             }
         });
 
@@ -161,8 +172,8 @@ public class ReportChartMonthly extends Fragment {
 
     private void loadPieChart(int userID, int month, int year) {
         List<PieEntry> entries = new ArrayList<>();
-        List<String> categories = categoriesModel.getExpenseCategoriesForUser(userID, month, year);
-        List<Integer> amounts = incomeExpenseModel.getExpenseAmountsForUser(userID, month, year);
+        List<String> categories = categoriesModel.getExpenseOrIncomeCategoriesForUser(userID, month, year, type);
+        List<Integer> amounts = incomeExpenseModel.getExpenseOrIncomeAmountsForUser(userID, month, year, type);
 
         for (int i = 0; i < categories.size(); i++) {
             entries.add(new PieEntry(amounts.get(i), categories.get(i)));
