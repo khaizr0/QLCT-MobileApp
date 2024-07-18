@@ -84,40 +84,41 @@ public class CalendarFragment extends Fragment {
     private void updateCalendar() {
         String selectedDate = (String) monthSpinner.getSelectedItem();
         String[] parts = selectedDate.split("/");
-        int month = Integer.parseInt(parts[0]) - 1; // Month is 0-based in Calendar
+        int month = Integer.parseInt(parts[0]);
         int year = Integer.parseInt(parts[1]);
 
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-
-        int firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-        int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        IncomeExpenseModel_nguyen model = new IncomeExpenseModel_nguyen(requireContext());
+        List<IncomeExpenseModel_nguyen> incomeExpenseList = model.getIncomeExpensesByMonth(session.getUserId(), month, year);
 
         List<CalendarDay> days = new ArrayList<>();
-        IncomeExpenseModel_nguyen model = new IncomeExpenseModel_nguyen(requireContext());
 
+        // Initialize days array with empty data for proper calendar view
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        int firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         for (int i = 0; i < firstDayOfWeek; i++) {
             days.add(new CalendarDay("", "", ""));
         }
         for (int i = 1; i <= daysInMonth; i++) {
-            calendar.set(Calendar.DAY_OF_MONTH, i);
-            String date = String.format("%04d-%02d-%02d", year, month + 1, i);
-            List<IncomeExpenseModel_nguyen> dailyData = model.getIncomeExpensesByDate(date);
+            days.add(new CalendarDay(String.valueOf(i), "", ""));
+        }
 
-            String income = "";
-            String expense = "";
-            for (IncomeExpenseModel_nguyen item : dailyData) {
-                if (item.getType() == 1) {
-                    income = item.getAmount();
-                } else {
-                    expense = item.getAmount();
-                }
+        // Populate income and expense data
+        for (IncomeExpenseModel_nguyen item : incomeExpenseList) {
+            String[] dateParts = item.getDate().split("-");
+            int day = Integer.parseInt(dateParts[2]);
+            CalendarDay dayData = days.get(firstDayOfWeek + day - 1);
+            if (item.getType() == 1) {
+                dayData.setIncome(item.getAmount());
+            } else {
+                dayData.setExpense(item.getAmount());
             }
-            days.add(new CalendarDay(String.valueOf(i), income, expense));
         }
 
         calendarAdapter.setDays(days);
     }
+
 
 }

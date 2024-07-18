@@ -33,7 +33,10 @@ public class IncomeExpenseModel_nguyen {
 
     public IncomeExpenseModel_nguyen() {
     }
-
+    public IncomeExpenseModel_nguyen(Context context) {
+        ExpenseDB dbHelper = new ExpenseDB(context);
+        this.database = dbHelper.getWritableDatabase();
+    }
     public int getIncomeExpenseId() {
         return incomeExpenseId;
     }
@@ -74,9 +77,12 @@ public class IncomeExpenseModel_nguyen {
     private SQLiteDatabase database;
 
 
-    public List<IncomeExpenseModel_nguyen> getIncomeExpensesByDate(int userId) {
+    public List<IncomeExpenseModel_nguyen> getIncomeExpensesByMonth(int userId, int month, int year) {
         List<IncomeExpenseModel_nguyen> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM income_expense WHERE UserID = ?", new int[]{userId});
+        String startDate = String.format("%04d-%02d-01", year, month);
+        String endDate = String.format("%04d-%02d-31", year, month);
+        Cursor cursor = database.rawQuery("SELECT * FROM IncomeExpense WHERE UserID = ? AND Date BETWEEN ? AND ?",
+                new String[]{String.valueOf(userId), startDate, endDate});
         if (cursor.moveToFirst()) {
             do {
                 IncomeExpenseModel_nguyen item = new IncomeExpenseModel_nguyen();
@@ -93,5 +99,7 @@ public class IncomeExpenseModel_nguyen {
         cursor.close();
         return list;
     }
+
+
 
 }
