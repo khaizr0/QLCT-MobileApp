@@ -7,12 +7,24 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.IncomeExpenseModel_vinh;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 /**
@@ -30,6 +42,8 @@ public class InYear_Tong extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    BarChart barChart;
+    TextView totalYear,averageYear, chiTieuYear, thuNhapYear;
 
     public InYear_Tong() {
         // Required empty public constructor
@@ -65,6 +79,11 @@ public class InYear_Tong extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_in_year__tong, container, false);
+        barChart = view.findViewById(R.id.barChart);
+        totalYear = view.findViewById(R.id.totalYear);
+        averageYear = view.findViewById(R.id.averageYear);
+        thuNhapYear = view.findViewById(R.id.thuNhapYear);
+        chiTieuYear = view.findViewById(R.id.chiTieuYear);
 
         showYearPickerDialog(view);
 
@@ -82,5 +101,51 @@ public class InYear_Tong extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearSpinner.setAdapter(adapter);
         yearSpinner.setSelection(adapter.getPosition(String.valueOf(currentYear)));
+        yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                int selectedYear = Integer.parseInt(yearSpinner.getSelectedItem().toString());
+                updateData(selectedYear);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void updateData(int year) {
+        IncomeExpenseModel_vinh model = new IncomeExpenseModel_vinh(getContext());
+
+        HashMap<String, Integer> monthlyExpenses = model.getMonthlyExpenses(year);
+        HashMap<String, Integer> monthlyIncome = model.getMonthlyIncome(year);
+        HashMap<String, Integer> yearlySummary = model.getYearlySummary(year);
+
+        List<BarEntry> entries = new ArrayList<>();
+        for (int i = 1; i <= 12; i++) {
+            float expense = monthlyExpenses.getOrDefault("Tháng " + i, 0);
+            float income = monthlyIncome.getOrDefault("Tháng " + i, 0);
+            float totalM = income - expense;
+            entries.add(new BarEntry(i, new float[]{totalM}));
+        }
+
+        BarDataSet set = new BarDataSet(entries, "Tổng thu nhập và chi tiêu");
+        set.setColors(ColorTemplate.MATERIAL_COLORS);
+        set.setStackLabels(new String[]{"Total"});
+
+        BarData data = new BarData(set);
+        barChart.setData(data);
+        barChart.invalidate();
+
+        int totalIncome = yearlySummary.get("TotalIncome");
+        int totalExpense = yearlySummary.get("TotalExpense");
+        int total = totalIncome - totalExpense;
+        int average = total / 12;
+
+        thuNhapYear.setText(String.valueOf(totalIncome));
+        chiTieuYear.setText(String.valueOf(totalExpense));
+        totalYear.setText(String.valueOf(total));
+        averageYear.setText(String.valueOf(average));
     }
 }

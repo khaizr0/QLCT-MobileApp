@@ -129,4 +129,34 @@ public class IncomeExpenseModel_vinh {
 
         return monthlyIncome;
     }
+
+    public HashMap<String, Integer> getYearlySummary(int year) {
+        HashMap<String, Integer> yearlySummary = new HashMap<>();
+        yearlySummary.put("TotalIncome", 0);
+        yearlySummary.put("TotalExpense", 0);
+
+        String queryIncome = "SELECT SUM(" + ExpenseDB.getAmount() + ") AS totalIncome " +
+                "FROM " + ExpenseDB.getTableIncomeExpense() + " " +
+                "WHERE " + ExpenseDB.getType() + " = 1 AND strftime('%Y', " + ExpenseDB.getDate() + ") = ?";
+        String queryExpense = "SELECT SUM(" + ExpenseDB.getAmount() + ") AS totalExpense " +
+                "FROM " + ExpenseDB.getTableIncomeExpense() + " " +
+                "WHERE " + ExpenseDB.getType() + " = 0 AND strftime('%Y', " + ExpenseDB.getDate() + ") = ?";
+
+        Cursor cursorIncome = db.rawQuery(queryIncome, new String[]{String.valueOf(year)});
+        Cursor cursorExpense = db.rawQuery(queryExpense, new String[]{String.valueOf(year)});
+
+        if (cursorIncome.moveToFirst()) {
+            int totalIncome = cursorIncome.getInt(cursorIncome.getColumnIndex("totalIncome"));
+            yearlySummary.put("TotalIncome", totalIncome);
+        }
+        cursorIncome.close();
+
+        if (cursorExpense.moveToFirst()) {
+            int totalExpense = cursorExpense.getInt(cursorExpense.getColumnIndex("totalExpense"));
+            yearlySummary.put("TotalExpense", totalExpense);
+        }
+        cursorExpense.close();
+
+        return yearlySummary;
+    }
 }
