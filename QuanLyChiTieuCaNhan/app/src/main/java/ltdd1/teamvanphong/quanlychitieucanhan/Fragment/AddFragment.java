@@ -97,7 +97,7 @@ public class AddFragment extends Fragment {
 
     private void loadEditTextDate() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String currentDate = dateFormat.format(calendar.getTime());
         editTextDate.setText(currentDate);
     }
@@ -110,7 +110,7 @@ public class AddFragment extends Fragment {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
                 (view, year1, monthOfYear, dayOfMonth) -> {
-                    String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1;
+                    String selectedDate = String.format("%d-%02d-%02d", year1, monthOfYear + 1, dayOfMonth);
                     editTextDate.setText(selectedDate);
                 }, year, month, day);
         datePickerDialog.show();
