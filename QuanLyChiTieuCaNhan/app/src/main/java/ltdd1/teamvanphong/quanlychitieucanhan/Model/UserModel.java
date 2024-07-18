@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ltdd1.teamvanphong.quanlychitieucanhan.Database.ExpenseDB;
 
 public class UserModel {
@@ -124,20 +127,46 @@ public class UserModel {
     }
 
     //Đăng kí:
-    public static boolean registerUser(Context context, String userName, String email, String password, int gender, String phone) {
+    public static boolean registerUser(Context context, String username, String email, String password, int gender, String phone) {
         SQLiteOpenHelper dbHelper = new ExpenseDB(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-
         ContentValues values = new ContentValues();
-        values.put("UserName", userName);
+        values.put("UserName", username);
         values.put("Email", email);
         values.put("PassWork", password);
         values.put("Gender", gender);
         values.put("Sdt", phone);
 
-        long result = db.insert("User", null, values);
-        db.close();
+        long userId = db.insert("User", null, values);
 
-        return result != -1; // Return true if insert was successful
+        if (userId == -1) {
+            db.close();
+            return false;
+        }
+
+        addDefaultCategories(db, (int) userId);
+
+        db.close();
+        return true;
+    }
+    private static void addDefaultCategories(SQLiteDatabase db, int userId) {
+        List<ContentValues> defaultCategories = new ArrayList<>();
+
+        defaultCategories.add(createCategory("Y Tế", "#FF0000", "ic_cate_hospital", 0, userId));
+        defaultCategories.add(createCategory("Công Việc", "#964B00", "ic_cate_work", 1, userId));
+        defaultCategories.add(createCategory("Cà Phê", "#A52A2A", "ic_cate_cafe", 0, userId));
+
+        for (ContentValues values : defaultCategories) {
+            db.insert("Categories", null, values);
+        }
+    }
+    private static ContentValues createCategory(String name, String color, String iconName, int type, int userId) {
+        ContentValues values = new ContentValues();
+        values.put("CategoryName", name);
+        values.put("Color", color);
+        values.put("IconName", iconName);
+        values.put("Type", type);
+        values.put("UserID", userId);
+        return values;
     }
 }
