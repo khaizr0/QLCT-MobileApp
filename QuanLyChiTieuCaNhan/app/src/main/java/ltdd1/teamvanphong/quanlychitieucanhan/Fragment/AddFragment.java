@@ -165,7 +165,11 @@ public class AddFragment extends Fragment {
         values.put("UserId", incomeExpense.getUserId());
         values.put("CategoryId", incomeExpense.getCategoryId());
 
+        // Insert into database
+        long newRowId = db.insert("IncomeExpense", null, values);
+
         // Debug
+        Log.d("SaveExpense", "New row ID: " + newRowId);
         Log.d("SaveExpense", "Type: " + incomeExpense.getType());
         Log.d("SaveExpense", "Amount: " + incomeExpense.getAmount());
         Log.d("SaveExpense", "Date: " + incomeExpense.getDate());
@@ -173,7 +177,6 @@ public class AddFragment extends Fragment {
         Log.d("SaveExpense", "UserId: " + incomeExpense.getUserId());
         Log.d("SaveExpense", "CategoryId: " + incomeExpense.getCategoryId());
 
-        db.insert("IncomeExpense", null, values);
         db.close();
     }
 }
