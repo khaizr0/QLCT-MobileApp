@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import ltdd1.teamvanphong.quanlychitieucanhan.Activity.IconItem;
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.IconItem;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class IconSpinnerAdapter extends ArrayAdapter<IconItem> {

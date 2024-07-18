@@ -7,17 +7,15 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Arrays;
 import java.util.List;
 
 import ltdd1.teamvanphong.quanlychitieucanhan.Adapter.ColorSpinnerAdapter;
 import ltdd1.teamvanphong.quanlychitieucanhan.Adapter.IconSpinnerAdapter;
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.ColorItem;
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.IconItem;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class SuaDanhMuc extends AppCompatActivity {

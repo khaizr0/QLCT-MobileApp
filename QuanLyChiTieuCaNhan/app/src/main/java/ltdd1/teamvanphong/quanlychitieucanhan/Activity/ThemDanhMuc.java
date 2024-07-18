@@ -4,10 +4,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Arrays;
@@ -15,6 +14,8 @@ import java.util.List;
 
 import ltdd1.teamvanphong.quanlychitieucanhan.Adapter.ColorSpinnerAdapter;
 import ltdd1.teamvanphong.quanlychitieucanhan.Adapter.IconSpinnerAdapter;
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.ColorItem;
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.IconItem;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class ThemDanhMuc extends AppCompatActivity {

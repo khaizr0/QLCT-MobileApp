@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import ltdd1.teamvanphong.quanlychitieucanhan.Activity.ColorItem;
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.ColorItem;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class ColorSpinnerAdapter extends ArrayAdapter<ColorItem> {

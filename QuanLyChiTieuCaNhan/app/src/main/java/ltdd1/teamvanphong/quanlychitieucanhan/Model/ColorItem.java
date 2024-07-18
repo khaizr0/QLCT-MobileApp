@@ -1,4 +1,4 @@
-package ltdd1.teamvanphong.quanlychitieucanhan.Activity;
+package ltdd1.teamvanphong.quanlychitieucanhan.Model;
 
 public class ColorItem {
     private String colorHex;

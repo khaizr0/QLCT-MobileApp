@@ -90,7 +90,8 @@ public class ExpenseDB extends SQLiteOpenHelper {
         userValues.put(PHONE, "1234567890");
         long userId = db.insert(TABLE_USER, null, userValues);
 
-        String[] categoryNames = {"baseline_add_box_24", "baseline_calendar_month_24", "baseline_currency_exchange_24"};
+        String[] categoryNames = {"Bệnh Viện", "Làm Bác Sĩ", "Phím"};
+        String[] iconNames = {"ic_cate_hospital", "ic_cate_work", "ic_cate_cafe"};
         String[] colors = {"#FFFFFF", "#FF0000", "#00FF00"};
         int[] types = {0, 1, 0};
 
@@ -98,7 +99,7 @@ public class ExpenseDB extends SQLiteOpenHelper {
             ContentValues categoryValues = new ContentValues();
             categoryValues.put(CATEGORY_NAME, categoryNames[i]);
             categoryValues.put(COLOR, colors[i]);
-            categoryValues.put(ICON_NAME, categoryNames[i]);
+            categoryValues.put(ICON_NAME, iconNames[i]);
             categoryValues.put(TYPE, types[i]);
             categoryValues.put(USER_ID, userId);
             db.insert(TABLE_CATEGORIES, null, categoryValues);
