@@ -49,7 +49,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
             } else if (dayOfWeek == Calendar.SUNDAY) {
                 holder.dayText.setTextColor(holder.itemView.getContext().getResources().getColor(android.R.color.holo_red_dark));
             } else {
-                holder.dayText.setTextColor(holder.itemView.getContext().getResources().getColor(android.R.color.black));
+                holder.dayText.setTextColor(holder.itemView.getContext().getResources().getColor(android.R.color.white));
             }
         }
     }
