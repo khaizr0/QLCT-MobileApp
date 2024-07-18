@@ -145,6 +145,7 @@
         android:padding="10dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCategory"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:padding="10dp"
