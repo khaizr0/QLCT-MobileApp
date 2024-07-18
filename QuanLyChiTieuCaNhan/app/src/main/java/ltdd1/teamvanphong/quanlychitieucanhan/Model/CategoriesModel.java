@@ -20,6 +20,14 @@ public class CategoriesModel {
     private int type;
     private int userId;
 
+    private SQLiteDatabase database;
+    public CategoriesModel (){}
+    public CategoriesModel (Context context){
+        ExpenseDB dbHelper = new ExpenseDB(context);
+        this.database = dbHelper.getWritableDatabase();
+    }
+
+
     // Getters và setters
     public int getCategoryId() { return categoryId; }
     public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
@@ -34,7 +42,27 @@ public class CategoriesModel {
     public int getUserId() { return userId; }
     public void setUserId(int userId) { this.userId = userId; }
 
-    // Hàm lấy danh sách danh mục từ database theo Type và UserId
+
+    public List<String> getExpenseCategoriesForUser(int userId, int month, int year) {
+        List<String> categories = new ArrayList<>();
+        String startDate = String.format("%04d-%02d-01", year, month);
+        String endDate = String.format("%04d-%02d-31", year, month);
+
+        String query = "SELECT DISTINCT C.CategoryName " +
+                "FROM IncomeExpense IE " +
+                "JOIN Categories C ON IE.CategoryID = C.CategoryID " +
+                "WHERE IE.UserID = ? AND IE.Type = 0 AND IE.Date BETWEEN ? AND ?";
+        Cursor cursor = database.rawQuery(query, new String[]{String.valueOf(userId), startDate, endDate});
+
+        if (cursor.moveToFirst()) {
+            do {
+                categories.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return categories;
+    }
+
     public static List<CategoriesModel> getCategoriesByTypeAndUserId(Context context, int type) {
         List<CategoriesModel> categoryList = new ArrayList<>();
         SQLiteOpenHelper dbHelper = new ExpenseDB(context);

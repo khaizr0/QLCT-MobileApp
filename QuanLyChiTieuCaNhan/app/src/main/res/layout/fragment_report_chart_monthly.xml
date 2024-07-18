@@ -54,10 +54,11 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/txtTotalIncome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="14,111,111đ"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/holo_blue_dark"
                 android:padding="8dp"
                 android:textSize="16sp" />
         </TableRow>
@@ -78,11 +79,12 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/txtTotalExpense"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="14,111,111đ"
-                android:textColor="@android:color/white"
+                android:layout_height="match_parent"
                 android:padding="8dp"
+                android:text="14,111,111đ"
+                android:textColor="@android:color/holo_red_dark"
                 android:textSize="16sp" />
         </TableRow>
 
@@ -102,6 +104,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/txtTotalIncomeExpense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0đ"

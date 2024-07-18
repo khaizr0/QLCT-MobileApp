@@ -8,7 +8,9 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ltdd1.teamvanphong.quanlychitieucanhan.Database.ExpenseDB;
 
@@ -21,8 +23,9 @@ public class IncomeExpenseModel_nguyen {
     private int userId;
     private int categoryId;
 
-    public IncomeExpenseModel_nguyen() {
-    }
+    private SQLiteDatabase database;
+
+    public IncomeExpenseModel_nguyen() {}
     public IncomeExpenseModel_nguyen(Context context) {
         ExpenseDB dbHelper = new ExpenseDB(context);
         this.database = dbHelper.getWritableDatabase();
@@ -64,7 +67,83 @@ public class IncomeExpenseModel_nguyen {
         this.categoryId = categoryId;
     }
 
-    private SQLiteDatabase database;
+
+    public List<CalendarDay> aggregateIncomeExpenses(List<IncomeExpenseModel_nguyen> incomeExpenseList) {
+        Map<String, CalendarDay> dailyMap = new HashMap<>();
+
+        for (IncomeExpenseModel_nguyen item : incomeExpenseList) {
+            String date = item.getDate();
+            double amount = Double.parseDouble(item.getAmount());
+
+            CalendarDay dailyIncomeExpense = dailyMap.get(date);
+            if (dailyIncomeExpense == null) {
+                dailyIncomeExpense = new CalendarDay(date, 0, 0);
+                dailyMap.put(date, dailyIncomeExpense);
+            }
+
+            if (item.getType() == 1) {
+                dailyIncomeExpense.setIncome(dailyIncomeExpense.getIncome() + amount);
+            } else {
+                dailyIncomeExpense.setExpense(dailyIncomeExpense.getExpense() + amount);
+            }
+        }
+
+        return new ArrayList<>(dailyMap.values());
+    }
+
+
+
+    public List<Integer> getExpenseAmountsForUser(int userId, int month, int year) {
+        List<Integer> amounts = new ArrayList<>();
+        String startDate = String.format("%04d-%02d-01", year, month);
+        String endDate = String.format("%04d-%02d-31", year, month);
+
+        String query = "SELECT SUM(IE.Amount) " +
+                "FROM IncomeExpense IE " +
+                "JOIN Categories C ON IE.CategoryID = C.CategoryID " +
+                "WHERE IE.UserID = ? AND IE.Type = 0 AND IE.Date BETWEEN ? AND ? " +
+                "GROUP BY C.CategoryID";
+        Cursor cursor = database.rawQuery(query, new String[]{String.valueOf(userId), startDate, endDate});
+
+        if (cursor.moveToFirst()) {
+            do {
+                amounts.add(cursor.getInt(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return amounts;
+    }
+
+    public String getSumIncomeForUser(int userId, int month, int year) {
+        String startDate = String.format("%04d-%02d-01", year, month);
+        String endDate = String.format("%04d-%02d-31", year, month);
+        Cursor cursor = database.rawQuery(
+                "SELECT SUM(Amount) FROM IncomeExpense WHERE UserID = ? AND Type = 1 AND Date BETWEEN ? AND ?",
+                new String[]{String.valueOf(userId), startDate, endDate}
+        );
+        String sumIncome = "0";
+        if (cursor.moveToFirst()) {
+            sumIncome = cursor.getString(0);
+        }
+        cursor.close();
+        return sumIncome;
+    }
+
+    public String getSumExpenseForUser(int userId, int month, int year) {
+
+        String startDate = String.format("%04d-%02d-01", year, month);
+        String endDate = String.format("%04d-%02d-31", year, month);
+        Cursor cursor = database.rawQuery(
+                "SELECT SUM(Amount) FROM IncomeExpense WHERE UserID = ? AND Type = 0 AND Date BETWEEN ? AND ?",
+                new String[]{String.valueOf(userId), startDate, endDate}
+        );
+        String sumExpense = "0";
+        if (cursor.moveToFirst()) {
+            sumExpense = cursor.getString(0);
+        }
+        cursor.close();
+        return sumExpense;
+    }
 
 
     public List<IncomeExpenseModel_nguyen> getIncomeExpensesByMonth(int userId, int month, int year) {
