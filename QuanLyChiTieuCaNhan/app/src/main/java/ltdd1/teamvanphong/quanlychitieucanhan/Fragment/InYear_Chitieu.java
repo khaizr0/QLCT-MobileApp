@@ -2,18 +2,26 @@ package ltdd1.teamvanphong.quanlychitieucanhan.Fragment;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.IncomeExpenseModel_vinh;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 /**
@@ -31,6 +39,9 @@ public class InYear_Chitieu extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    BarChart barChart;
+    TextView totalTextView, averageTextView;
+    TextView[] monthTextViews;
 
     public InYear_Chitieu() {
         // Required empty public constructor
@@ -66,7 +77,24 @@ public class InYear_Chitieu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_in_year__chitieu, container, false);
+        barChart = view.findViewById(R.id.barChart);
+        totalTextView = view.findViewById(R.id.totalTextView);
+        averageTextView = view.findViewById(R.id.averageTextView);
 
+        monthTextViews = new TextView[]{
+                view.findViewById(R.id.thang1_chitieu),
+                view.findViewById(R.id.thang2_chitieu),
+                view.findViewById(R.id.thang3_chitieu),
+                view.findViewById(R.id.thang4_chitieu),
+                view.findViewById(R.id.thang5_chitieu),
+                view.findViewById(R.id.thang6_chitieu),
+                view.findViewById(R.id.thang7_chitieu),
+                view.findViewById(R.id.thang8_chitieu),
+                view.findViewById(R.id.thang9_chitieu),
+                view.findViewById(R.id.thang10_chitieu),
+                view.findViewById(R.id.thang11_chitieu),
+                view.findViewById(R.id.thang12_chitieu)
+        };
         showYearPickerDialog(view);
 
         return view;
@@ -84,5 +112,43 @@ public class InYear_Chitieu extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearSpinner.setAdapter(adapter);
         yearSpinner.setSelection(adapter.getPosition(String.valueOf(currentYear)));
+
+        yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                int selectedYear = Integer.parseInt(years.get(position));
+                updateChartAndViews(selectedYear);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
+
+    void updateChartAndViews(int year) {
+        IncomeExpenseModel_vinh model = new IncomeExpenseModel_vinh(getContext());
+        HashMap<String, Integer> monthlyExpenses = model.getMonthlyExpenses(year);
+
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        int total = 0;
+
+        for (int i = 1; i <= 12; i++) {
+            int expense = monthlyExpenses.get("Tháng " + i);
+            total += expense;
+            entries.add(new BarEntry(i, expense));
+            monthTextViews[i-1].setText(String.valueOf(expense));
+        }
+
+        BarDataSet dataSet = new BarDataSet(entries, "Monthly Expenses");
+        BarData barData = new BarData(dataSet);
+        barChart.setData(barData);
+        barChart.invalidate();
+
+        totalTextView.setText("Tổng: " + total);
+        averageTextView.setText("Trung Bình: " + (total / 12));
+    }
+
 }

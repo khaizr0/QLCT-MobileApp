@@ -7,12 +7,24 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.IncomeExpenseModel_vinh;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 /**
@@ -30,6 +42,9 @@ public class InYear_ThuNhap extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    BarChart barChart;
+    TextView totalTextView, averageTextView;
+    TextView[] monthTextViews;
 
     public InYear_ThuNhap() {
         // Required empty public constructor
@@ -65,7 +80,24 @@ public class InYear_ThuNhap extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_in_year__thu_nhap, container, false);
+        barChart = view.findViewById(R.id.barChart);
+        totalTextView = view.findViewById(R.id.totalTextView);
+        averageTextView = view.findViewById(R.id.averageTextView);
 
+        monthTextViews = new TextView[]{
+                view.findViewById(R.id.thang1_chitieu),
+                view.findViewById(R.id.thang2_chitieu),
+                view.findViewById(R.id.thang3_chitieu),
+                view.findViewById(R.id.thang4_chitieu),
+                view.findViewById(R.id.thang5_chitieu),
+                view.findViewById(R.id.thang6_chitieu),
+                view.findViewById(R.id.thang7_chitieu),
+                view.findViewById(R.id.thang8_chitieu),
+                view.findViewById(R.id.thang9_chitieu),
+                view.findViewById(R.id.thang10_chitieu),
+                view.findViewById(R.id.thang11_chitieu),
+                view.findViewById(R.id.thang12_chitieu)
+        };
         showYearPickerDialog(view);
 
         return view;
@@ -82,5 +114,58 @@ public class InYear_ThuNhap extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearSpinner.setAdapter(adapter);
         yearSpinner.setSelection(adapter.getPosition(String.valueOf(currentYear)));
+        yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                int selectedYear = Integer.parseInt(years.get(position));
+                updateChartAndViews(selectedYear);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    void updateChartAndViews(int year) {
+        IncomeExpenseModel_vinh model = new IncomeExpenseModel_vinh(getContext());
+        HashMap<String, Integer> monthlyIncome = model.getMonthlyIncome(year);
+
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        int total = 0;
+
+        for (int i = 1; i <= 12; i++) {
+            int income = monthlyIncome.get("Tháng " + i);
+            total += income;
+            entries.add(new BarEntry(i, income));
+            monthTextViews[i-1].setText(String.valueOf(income));
+        }
+
+        BarDataSet dataSet = new BarDataSet(entries, "");
+        BarData barData = new BarData(dataSet);
+        barChart.setData(barData);
+        barChart.invalidate();
+
+        totalTextView.setText("Tổng: " + total);
+        averageTextView.setText("Trung Bình: " + (total / 12));
+
+        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(){
+            @Override
+            public String getFormattedValue(float value) {
+                int monthIndex = (int) value;
+                if (monthIndex >= 1 && monthIndex <= 12) {
+                    return "Tháng " + monthIndex;
+                }
+                return "";
+            }
+        });
+        barChart.getAxisLeft().setValueFormatter(new DefaultAxisValueFormatter(0)
+        {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return String.format("%.0f", value) + " VNĐ"; // Định dạng tiền tệ theo ý muốn
+            }
+        });
     }
 }
