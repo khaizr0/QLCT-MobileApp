@@ -82,7 +82,6 @@ public class ExpenseDB extends SQLiteOpenHelper {
     }
 
     private void initData(SQLiteDatabase db) {
-        // Insert sample user
         ContentValues userValues = new ContentValues();
         userValues.put(USER_NAME, "123");
         userValues.put(EMAIL, "123@example.com");
@@ -91,7 +90,6 @@ public class ExpenseDB extends SQLiteOpenHelper {
         userValues.put(PHONE, "1234567890");
         long userId = db.insert(TABLE_USER, null, userValues);
 
-        // Insert sample categories
         String[] categoryNames = {"Bệnh Viện", "Làm Bác Sĩ", "Phím"};
         String[] iconNames = {"ic_cate_hospital", "ic_cate_work", "ic_cate_cafe"};
         String[] colors = {"#FFFFFF", "#FF0000", "#00FF00"};
@@ -107,17 +105,15 @@ public class ExpenseDB extends SQLiteOpenHelper {
             db.insert(TABLE_CATEGORIES, null, categoryValues);
         }
 
-        // Insert sample income/expense
         ContentValues incomeExpenseValues = new ContentValues();
         incomeExpenseValues.put(TYPE, 1);  // Giả sử 1 là thu nhập
         incomeExpenseValues.put(AMOUNT, "5000");
-        incomeExpenseValues.put(DATE, "2024-01-01");
+        incomeExpenseValues.put(DATE, "2024-07-07");
         incomeExpenseValues.put(NOTE, "Lương tháng 1");
         incomeExpenseValues.put(USER_ID, userId);
         incomeExpenseValues.put(CATEGORY_ID, 1); // Giả sử ID của category là 1
         long incomeExpenseId = db.insert(TABLE_INCOME_EXPENSE, null, incomeExpenseValues);
 
-        // Insert sample fixed income/expense
         ContentValues fixedIncomeExpenseValues = new ContentValues();
         fixedIncomeExpenseValues.put(DATE, "2024-01-01");
         fixedIncomeExpenseValues.put(INCOME_EXPENSE_ID, incomeExpenseId);

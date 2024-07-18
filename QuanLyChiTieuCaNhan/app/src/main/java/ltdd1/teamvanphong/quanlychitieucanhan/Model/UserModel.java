@@ -16,10 +16,7 @@ public class UserModel {
     private int gender;
     private String phone;
 
-    // Getters and setters
-    public int getUserId() {
-        return userId;
-    }
+    public int getUserId() { return userId; }
 
     public void setUserId(int userId) {
         this.userId = userId;

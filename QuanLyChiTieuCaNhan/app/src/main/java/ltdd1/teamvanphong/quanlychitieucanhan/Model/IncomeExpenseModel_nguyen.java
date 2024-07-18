@@ -1,5 +1,17 @@
 package ltdd1.teamvanphong.quanlychitieucanhan.Model;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import ltdd1.teamvanphong.quanlychitieucanhan.Database.ExpenseDB;
+
 public class IncomeExpenseModel_nguyen {
     private int incomeExpenseId;
     private int type; //0 chi tiêu, 1 thu nhập
@@ -8,6 +20,19 @@ public class IncomeExpenseModel_nguyen {
     private String note;
     private int userId;
     private int categoryId;
+
+    public IncomeExpenseModel_nguyen(int incomeExpenseId, int type, String amount, String date, String note, int userId, int categoryId) {
+        this.incomeExpenseId = incomeExpenseId;
+        this.type = type;
+        this.amount = amount;
+        this.date = date;
+        this.note = note;
+        this.userId = userId;
+        this.categoryId = categoryId;
+    }
+
+    public IncomeExpenseModel_nguyen() {
+    }
 
     public int getIncomeExpenseId() {
         return incomeExpenseId;
@@ -23,9 +48,7 @@ public class IncomeExpenseModel_nguyen {
     public void setAmount(String amount) {
         this.amount = amount;
     }
-    public String getDate() {
-        return date;
-    }
+    public String getDate() { return date; }
     public void setDate(String date) {
         this.date = date;
     }
@@ -48,5 +71,27 @@ public class IncomeExpenseModel_nguyen {
         this.categoryId = categoryId;
     }
 
+    private SQLiteDatabase database;
+
+
+    public List<IncomeExpenseModel_nguyen> getIncomeExpensesByDate(int userId) {
+        List<IncomeExpenseModel_nguyen> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM income_expense WHERE UserID = ?", new int[]{userId});
+        if (cursor.moveToFirst()) {
+            do {
+                IncomeExpenseModel_nguyen item = new IncomeExpenseModel_nguyen();
+                item.setIncomeExpenseId(cursor.getInt(0));
+                item.setType(cursor.getInt(1));
+                item.setAmount(cursor.getString(2));
+                item.setDate(cursor.getString(3));
+                item.setNote(cursor.getString(4));
+                item.setUserId(cursor.getInt(5));
+                item.setCategoryId(cursor.getInt(6));
+                list.add(item);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
 
 }
