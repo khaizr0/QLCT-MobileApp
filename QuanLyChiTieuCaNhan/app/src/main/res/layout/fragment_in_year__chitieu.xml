@@ -11,21 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:padding="10dp"
             android:paddingBottom="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:text="Năm:"
                 android:textColor="#FFFFFF"
-                android:textSize="25sp"
-                android:layout_marginEnd="8dp" />
+                android:textSize="25sp" />
 
             <Spinner
                 android:id="@+id/yearSpinner"
@@ -33,10 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/edit_text_background"
-                android:padding="8dp"
-                android:textColor="#FFFFFF"
                 android:gravity="center"
-                android:textAlignment="center" />
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
         <!-- Bar Chart -->
@@ -50,30 +51,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/totalTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="8dp"
                 android:text="Tổng: 0"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 android:textColor="#FFFFFF"
-                android:padding="8dp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/averageTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="8dp"
                 android:text="Trung Bình: 0"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 android:textColor="#FFFFFF"
-                android:padding="8dp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <!-- Monthly Views -->
@@ -85,361 +86,361 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tháng 1"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:gravity="center_vertical" />
+                    android:text="Tháng 1"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/thang1_chitieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:gravity="center" />
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tháng 2"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:gravity="center_vertical" />
+                    android:text="Tháng 2"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/thang2_chitieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:gravity="center" />
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tháng 3"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:gravity="center_vertical" />
+                    android:text="Tháng 3"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/thang3_chitieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:gravity="center" />
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tháng 4"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:gravity="center_vertical" />
+                    android:text="Tháng 4"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/thang4_chitieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:gravity="center" />
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tháng 5"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:gravity="center_vertical" />
+                    android:text="Tháng 5"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/thang5_chitieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:gravity="center" />
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tháng 6"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:gravity="center_vertical" />
+                    android:text="Tháng 6"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/thang6_chitieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:gravity="center" />
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tháng 7"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:gravity="center_vertical" />
+                    android:text="Tháng 7"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/thang7_chitieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:gravity="center" />
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tháng 8"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:gravity="center_vertical" />
+                    android:text="Tháng 8"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/thang8_chitieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:gravity="center" />
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tháng 9"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:gravity="center_vertical" />
+                    android:text="Tháng 9"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/thang9_chitieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:gravity="center" />
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tháng 10"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:gravity="center_vertical" />
+                    android:text="Tháng 10"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/thang10_chitieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:gravity="center" />
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tháng 11"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:gravity="center_vertical" />
+                    android:text="Tháng 11"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/thang11_chitieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:gravity="center" />
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tháng 12"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:gravity="center_vertical" />
+                    android:text="Tháng 12"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/thang12_chitieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
                     android:background="@drawable/square_corner_background"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:gravity="center" />
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>

@@ -1,5 +1,6 @@
 package ltdd1.teamvanphong.quanlychitieucanhan.Fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,9 +14,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -126,7 +132,7 @@ public class InYear_Tong extends Fragment {
         for (int i = 1; i <= 12; i++) {
             float expense = monthlyExpenses.getOrDefault("Tháng " + i, 0);
             float income = monthlyIncome.getOrDefault("Tháng " + i, 0);
-            float totalM = income - expense;
+            float totalM = income + expense;
             entries.add(new BarEntry(i, new float[]{totalM}));
         }
 
@@ -140,12 +146,37 @@ public class InYear_Tong extends Fragment {
 
         int totalIncome = yearlySummary.get("TotalIncome");
         int totalExpense = yearlySummary.get("TotalExpense");
-        int total = totalIncome - totalExpense;
+        int total = totalIncome + totalExpense;
         int average = total / 12;
 
         thuNhapYear.setText(String.valueOf(totalIncome));
         chiTieuYear.setText(String.valueOf(totalExpense));
         totalYear.setText(String.valueOf(total));
         averageYear.setText(String.valueOf(average));
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                int monthIndex = (int) value;
+                if (monthIndex >= 1 && monthIndex <= 12) {
+                    return "Tháng " + monthIndex;
+                }
+                return "";
+            }
+        });
+        xAxis.setTextColor(Color.RED); // Thay đổi màu chữ của các nhãn trên trục X
+
+        YAxis leftAxis = barChart.getAxisLeft();
+        leftAxis.setValueFormatter(new DefaultAxisValueFormatter(0) {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return String.format("%.0f VNĐ", value); // Format currency as needed
+            }
+        });
+        leftAxis.setTextColor(Color.GREEN); // Thay đổi màu chữ của các nhãn trên trục Y bên trái
+
+        YAxis rightAxis = barChart.getAxisRight();
+        rightAxis.setTextColor(Color.BLUE);  // Thay đổi màu chữ của các nhãn trên trục Y bên phải (nếu có)
     }
 }

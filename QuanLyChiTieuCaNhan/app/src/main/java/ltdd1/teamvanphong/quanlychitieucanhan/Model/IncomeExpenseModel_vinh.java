@@ -146,13 +146,13 @@ public class IncomeExpenseModel_vinh {
         Cursor cursorExpense = db.rawQuery(queryExpense, new String[]{String.valueOf(year)});
 
         if (cursorIncome.moveToFirst()) {
-            int totalIncome = cursorIncome.getInt(cursorIncome.getColumnIndex("totalIncome"));
+            int totalIncome = cursorIncome.getInt(cursorIncome.getColumnIndexOrThrow("totalIncome"));
             yearlySummary.put("TotalIncome", totalIncome);
         }
         cursorIncome.close();
 
         if (cursorExpense.moveToFirst()) {
-            int totalExpense = cursorExpense.getInt(cursorExpense.getColumnIndex("totalExpense"));
+            int totalExpense = cursorExpense.getInt(cursorExpense.getColumnIndexOrThrow("totalExpense"));
             yearlySummary.put("TotalExpense", totalExpense);
         }
         cursorExpense.close();

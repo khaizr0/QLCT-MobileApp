@@ -1,5 +1,6 @@
 package ltdd1.teamvanphong.quanlychitieucanhan.Fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -150,7 +153,8 @@ public class InYear_ThuNhap extends Fragment {
         totalTextView.setText("Tổng: " + total);
         averageTextView.setText("Trung Bình: " + (total / 12));
 
-        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(){
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
                 int monthIndex = (int) value;
@@ -160,12 +164,18 @@ public class InYear_ThuNhap extends Fragment {
                 return "";
             }
         });
-        barChart.getAxisLeft().setValueFormatter(new DefaultAxisValueFormatter(0)
-        {
+        xAxis.setTextColor(Color.RED); // Thay đổi màu chữ của các nhãn trên trục X
+
+        YAxis leftAxis = barChart.getAxisLeft();
+        leftAxis.setValueFormatter(new DefaultAxisValueFormatter(0) {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return String.format("%.0f", value) + " VNĐ"; // Định dạng tiền tệ theo ý muốn
+                return String.format("%.0f VNĐ", value); // Format currency as needed
             }
         });
+        leftAxis.setTextColor(Color.GREEN); // Thay đổi màu chữ của các nhãn trên trục Y bên trái
+
+        YAxis rightAxis = barChart.getAxisRight();
+        rightAxis.setTextColor(Color.BLUE);  // Thay đổi màu chữ của các nhãn trên trục Y bên phải (nếu có)
     }
 }

@@ -14,12 +14,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class Other_report_balance extends Fragment {
+
+    LineChart lineChart;
+    TextView[] monthTextViews;
 
     @Nullable
     @Override
@@ -33,6 +38,23 @@ public class Other_report_balance extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(null);  // Remove default title
+
+        lineChart = view.findViewById(R.id.lineChart);
+
+        monthTextViews = new TextView[]{
+                view.findViewById(R.id.thang1_sodu),
+                view.findViewById(R.id.thang2_sodu),
+                view.findViewById(R.id.thang3_sodu),
+                view.findViewById(R.id.thang4_sodu),
+                view.findViewById(R.id.thang5_sodu),
+                view.findViewById(R.id.thang6_sodu),
+                view.findViewById(R.id.thang7_sodu),
+                view.findViewById(R.id.thang8_sodu),
+                view.findViewById(R.id.thang9_sodu),
+                view.findViewById(R.id.thang10_sodu),
+                view.findViewById(R.id.thang11_sodu),
+                view.findViewById(R.id.thang12_sodu)
+        };
 
         // Set click listener for back button
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
