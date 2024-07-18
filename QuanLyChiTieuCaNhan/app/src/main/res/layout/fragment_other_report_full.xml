@@ -53,6 +53,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/incomeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="14,111,111đ"
@@ -77,6 +78,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/expenseTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="14,111,111đ"
@@ -101,6 +103,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/totalTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0đ"
