@@ -1,5 +1,6 @@
 package ltdd1.teamvanphong.quanlychitieucanhan.Model;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -72,12 +73,12 @@ public class UserModel {
 
         if (cursor.moveToFirst()) {
             UserModel user = new UserModel();
-            user.setUserId(cursor.getInt(cursor.getColumnIndex("UserID")));
-            user.setUserName(cursor.getString(cursor.getColumnIndex("UserName")));
-            user.setEmail(cursor.getString(cursor.getColumnIndex("Email")));
-            user.setPassword(cursor.getString(cursor.getColumnIndex("PassWork")));
-            user.setGender(cursor.getInt(cursor.getColumnIndex("Gender")));
-            user.setPhone(cursor.getString(cursor.getColumnIndex("Sdt")));
+            user.setUserId(cursor.getInt(0));
+            user.setUserName(cursor.getString(1));
+            user.setEmail(cursor.getString(2));
+            user.setPassword(cursor.getString(3));
+            user.setGender(cursor.getInt(4));
+            user.setPhone(cursor.getString(5));
             cursor.close();
             db.close();
             return user;
@@ -85,5 +86,29 @@ public class UserModel {
         cursor.close();
         db.close();
         return null;
+    }
+
+    //Tien kiểm tra tên đăng nhập và email có tồn tại hay không
+    public static boolean validateUser(Context context, String username, String email) {
+        SQLiteOpenHelper dbHelper = new ExpenseDB(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String query = "SELECT * FROM User WHERE UserName=? AND Email=?";
+        Cursor cursor = db.rawQuery(query, new String[]{username, email});
+
+        boolean isValid = cursor.moveToFirst();
+        cursor.close();
+        db.close();
+        return isValid;
+    }
+
+    //Tiến cập nhật mật khẩu mới
+    public static boolean updatePassword(Context context, String username, String newPassword) {
+        SQLiteOpenHelper dbHelper = new ExpenseDB(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("PassWork", newPassword);
+        int rows = db.update("User", values, "UserName=?", new String[]{username});
+        db.close();
+        return rows > 0;
     }
 }

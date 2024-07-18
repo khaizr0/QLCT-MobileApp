@@ -1,6 +1,8 @@
 package ltdd1.teamvanphong.quanlychitieucanhan.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import ltdd1.teamvanphong.quanlychitieucanhan.Activity.DanhMuc;
+import ltdd1.teamvanphong.quanlychitieucanhan.Activity.Login;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class OtherSettingFragment extends Fragment {
@@ -29,6 +32,7 @@ public class OtherSettingFragment extends Fragment {
         LinearLayout layoutReportYear = view.findViewById(R.id.layout_report_year);
         LinearLayout layoutReportBalance = view.findViewById(R.id.layout_report_balance);
         LinearLayout layoutExport = view.findViewById(R.id.layout_export);
+        //Tien tìm layoutLogout trên frontend
         LinearLayout layoutLogout = view.findViewById(R.id.layout_logout);
 
         layoutInfo.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +72,13 @@ public class OtherSettingFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        //Tien Gán sự kiện cho logout
+        layoutLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleLogout();
+            }
+        });
         return view;
     }
 
@@ -76,5 +87,18 @@ public class OtherSettingFragment extends Fragment {
         transaction.replace(R.id.flFragment, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+    //Tien phương thức xử lý đăng xuất
+    private void handleLogout() {
+        // Clear user session data, dùng để lưu trữ thông tin tài khoản
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+
+        // Navigate back to the login screen
+        Intent intent = new Intent(getActivity(), Login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
