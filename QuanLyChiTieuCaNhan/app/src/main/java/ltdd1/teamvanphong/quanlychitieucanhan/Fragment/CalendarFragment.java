@@ -161,8 +161,8 @@ public class CalendarFragment extends Fragment {
         List<IncomeExpenseModel_nguyen> incomeExpenseList = model.getIncomeExpensesByMonth(userId, month, year);
 
         Map<Integer, CategoriesModel> categoryMap = new HashMap<>();
-        List<CategoriesModel> categories = CategoriesModel.getCategoriesByTypeAndUserId(requireContext(), 0, userId);
-        categories.addAll(CategoriesModel.getCategoriesByTypeAndUserId(requireContext(), 1, userId));
+        List<CategoriesModel> categories = CategoriesModel.getCategoriesByTypeAndUserId(requireContext(), 0);
+        categories.addAll(CategoriesModel.getCategoriesByTypeAndUserId(requireContext(), 1));
         for (CategoriesModel category : categories) {
             categoryMap.put(category.getCategoryId(), category);
         }
