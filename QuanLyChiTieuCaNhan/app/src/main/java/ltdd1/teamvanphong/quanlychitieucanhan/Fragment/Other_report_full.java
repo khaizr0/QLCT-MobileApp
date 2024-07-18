@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +62,9 @@ public class Other_report_full extends Fragment {
         if (user != null) {
             // Fetch and display report data
             displayReportData(user.getUserId());
+        } else {
+            // Log error
+            Log.e("Other_report_full", "User data not found in session");
         }
 
         return view;
@@ -72,6 +77,9 @@ public class Other_report_full extends Fragment {
             incomeTextView.setText(reportList.get(0).getAmountText());
             expenseTextView.setText(reportList.get(1).getAmountText());
             totalTextView.setText(reportList.get(2).getAmountText());
+        } else {
+            // Log error
+            Log.e("Other_report_full", "Report data is empty or null");
         }
     }
 

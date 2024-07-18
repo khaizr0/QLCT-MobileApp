@@ -26,7 +26,7 @@ public class OtherSettingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_other_setting, container, false);
 
         LinearLayout layoutInfo = view.findViewById(R.id.layout_info);
-        LinearLayout layoutExpense = view.findViewById(R.id.layout_expense);
+//        LinearLayout layoutExpense = view.findViewById(R.id.layout_expense);
         LinearLayout layoutCategory = view.findViewById(R.id.layout_category);
         LinearLayout layoutReportFull = view.findViewById(R.id.layout_report_full);
         LinearLayout layoutReportYear = view.findViewById(R.id.layout_report_year);
