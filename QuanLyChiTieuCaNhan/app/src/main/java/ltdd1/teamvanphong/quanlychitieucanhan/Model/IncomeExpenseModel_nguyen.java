@@ -12,54 +12,41 @@ public class IncomeExpenseModel_nguyen {
     public int getIncomeExpenseId() {
         return incomeExpenseId;
     }
-
     public void setIncomeExpenseId(int incomeExpenseId) {
         this.incomeExpenseId = incomeExpenseId;
     }
-
-    public int getType() {
-        return type;
-    }
-
+    public int getType() { return type; }
     public void setType(int type) { this.type = type;}
-
     public String getAmount() {
         return amount;
     }
-
     public void setAmount(String amount) {
         this.amount = amount;
     }
-
     public String getDate() {
         return date;
     }
-
     public void setDate(String date) {
         this.date = date;
     }
-
     public String getNote() {
         return note;
     }
-
     public void setNote(String note) {
         this.note = note;
     }
-
     public int getUserId() {
         return userId;
     }
-
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
     public int getCategoryId() {
         return categoryId;
     }
-
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
+
+
 }

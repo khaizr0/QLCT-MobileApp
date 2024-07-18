@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#45454545"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     tools:context=".Fragment.ReportChartYearly">
 
     <!-- Năm and year picker -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="10dp"
         android:paddingBottom="8dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:text="Năm:"
             android:textColor="#FFFFFF"
-            android:textSize="25sp"
-            android:layout_marginEnd="8dp" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/editTextDate"
             android:layout_width="250dp"
             android:layout_height="45dp"
             android:layout_marginHorizontal="16dp"
-            android:padding="10dp"
-            android:focusable="false"
-            android:clickable="true"
             android:background="@drawable/edit_text_background"
-            android:textColor="@color/white"/>
+            android:clickable="true"
+            android:focusable="false"
+            android:padding="10dp"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -42,8 +41,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingBottom="8dp">
 
         <!-- Chi tiêu -->
@@ -55,9 +54,9 @@
             android:background="@color/selectedColor"
             android:clickable="true"
             android:focusable="true"
-            android:padding="8dp"
+            android:gravity="center"
             android:orientation="vertical"
-            android:gravity="center">
+            android:padding="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,9 +77,9 @@
             android:background="@color/unselectedColor"
             android:clickable="true"
             android:focusable="true"
-            android:padding="8dp"
+            android:gravity="center"
             android:orientation="vertical"
-            android:gravity="center">
+            android:padding="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -99,59 +98,17 @@
         android:id="@+id/pie_chart"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:paddingBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:background="#45454545"
-        android:layout_marginBottom="16dp" />
+        android:paddingBottom="8dp" />
 
     <!-- Detailed info section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:background="#575757"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:paddingHorizontal="16dp">
+        android:orientation="vertical" />
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="Icon"
-                android:src="@drawable/baseline_fastfood_24" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Ăn uống"
-                android:textColor="#FF0000"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="5,000,000đ"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="45%"
-                android:textColor="#FFFFFF"
-                android:textSize="10dp" />
-        </LinearLayout>
-
-        <!-- Repeat similar blocks for other categories -->
-        <!-- ... -->
-
-    </LinearLayout>
-
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
