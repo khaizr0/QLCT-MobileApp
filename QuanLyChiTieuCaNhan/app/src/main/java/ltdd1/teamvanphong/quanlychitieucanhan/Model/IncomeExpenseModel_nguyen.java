@@ -21,16 +21,6 @@ public class IncomeExpenseModel_nguyen {
     private int userId;
     private int categoryId;
 
-    public IncomeExpenseModel_nguyen(int incomeExpenseId, int type, String amount, String date, String note, int userId, int categoryId) {
-        this.incomeExpenseId = incomeExpenseId;
-        this.type = type;
-        this.amount = amount;
-        this.date = date;
-        this.note = note;
-        this.userId = userId;
-        this.categoryId = categoryId;
-    }
-
     public IncomeExpenseModel_nguyen() {
     }
     public IncomeExpenseModel_nguyen(Context context) {
@@ -99,7 +89,5 @@ public class IncomeExpenseModel_nguyen {
         cursor.close();
         return list;
     }
-
-
 
 }

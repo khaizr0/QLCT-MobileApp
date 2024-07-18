@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,9 +18,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import ltdd1.teamvanphong.quanlychitieucanhan.Adapter.CalendarAdapter;
+import ltdd1.teamvanphong.quanlychitieucanhan.Adapter.ListViewPageCalendarAdapter;
 import ltdd1.teamvanphong.quanlychitieucanhan.Model.CalendarDay;
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.CategoriesModel;
 import ltdd1.teamvanphong.quanlychitieucanhan.Model.IncomeExpenseModel_nguyen;
 import ltdd1.teamvanphong.quanlychitieucanhan.Model.UserModel;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
@@ -33,7 +39,11 @@ public class CalendarFragment extends Fragment {
     private Calendar calendar = Calendar.getInstance();
     private int currentYear = calendar.get(Calendar.YEAR);
     private int currentMonth = calendar.get(Calendar.MONTH) + 1;
-    UserModel session = UserModel.getSessionUser();
+    private ListView listView;
+
+    private UserModel session = UserModel.getSessionUser();
+    private int userId = session.getUserId();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,12 +54,13 @@ public class CalendarFragment extends Fragment {
         txtIncome = view.findViewById(R.id.txtImcome);
         txtExpense = view.findViewById(R.id.txtExpense);
         txtTotal = view.findViewById(R.id.txtTotal);
-
+        listView = view.findViewById(R.id.listview);
 
         setupMonthSpinner();
         setupCalendarRecyclerView();
 
         updateCalendar();
+        updateListView();
 
         return view;
     }
@@ -97,8 +108,6 @@ public class CalendarFragment extends Fragment {
 
         IncomeExpenseModel_nguyen model = new IncomeExpenseModel_nguyen(requireContext());
 
-        int userId = session.getUserId();
-
         List<IncomeExpenseModel_nguyen> incomeExpenseList = model.getIncomeExpensesByMonth(userId, month, year);
 
         List<CalendarDay> days = new ArrayList<>();
@@ -141,7 +150,25 @@ public class CalendarFragment extends Fragment {
         txtExpense.setText(String.format("%.0fđ", totalExpense));
         txtTotal.setText(String.format("%.0fđ", totalIncome - totalExpense));
     }
+    private void updateListView() {
+        String selectedDate = (String) monthSpinner.getSelectedItem();
+        String[] parts = selectedDate.split("/");
+        int month = Integer.parseInt(parts[0]);
+        int year = Integer.parseInt(parts[1]);
 
+        IncomeExpenseModel_nguyen model = new IncomeExpenseModel_nguyen(requireContext());
 
+        List<IncomeExpenseModel_nguyen> incomeExpenseList = model.getIncomeExpensesByMonth(userId, month, year);
+
+        Map<Integer, CategoriesModel> categoryMap = new HashMap<>();
+        List<CategoriesModel> categories = CategoriesModel.getCategoriesByTypeAndUserId(requireContext(), 0, userId);
+        categories.addAll(CategoriesModel.getCategoriesByTypeAndUserId(requireContext(), 1, userId));
+        for (CategoriesModel category : categories) {
+            categoryMap.put(category.getCategoryId(), category);
+        }
+
+        ListViewPageCalendarAdapter adapter = new ListViewPageCalendarAdapter(requireContext(), incomeExpenseList, categoryMap);
+        listView.setAdapter(adapter);
+    }
 
 }
