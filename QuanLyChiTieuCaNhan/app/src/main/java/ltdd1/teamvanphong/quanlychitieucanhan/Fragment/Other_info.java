@@ -36,7 +36,7 @@ public class Other_info extends Fragment {
         // Initialize database and print all income and expenses (hidden function)
         ExpenseDB db = new ExpenseDB(getContext());
 //        db.printAllIncomeExpense();
-        db.printAllCategories();
+//        db.printAllCategories();
 
         // Find the back button
         icBack = view.findViewById(R.id.btn_back);

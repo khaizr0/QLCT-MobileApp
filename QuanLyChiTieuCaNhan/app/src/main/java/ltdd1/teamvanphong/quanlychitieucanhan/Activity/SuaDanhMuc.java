@@ -266,19 +266,23 @@ public class SuaDanhMuc extends AppCompatActivity {
         values.put("Type", category.getType());
         values.put("UserID", category.getUserId());
 
-        long newRowId = db.insert("Categories", null, values);
-        if (newRowId == -1) {
-            Toast.makeText(this, "Thêm danh mục thất bại", Toast.LENGTH_SHORT).show();
+        if (categoryId != -1) {
+            // Update existing category
+            int rowsAffected = db.update("Categories", values, "CategoryID=?", new String[]{String.valueOf(categoryId)});
+            if (rowsAffected == 1) {
+                Toast.makeText(this, "Cập nhật danh mục thành công", Toast.LENGTH_SHORT).show();
+                Intent resultIntent = new Intent();
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            } else {
+                Toast.makeText(this, "Cập nhật danh mục thất bại", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            Toast.makeText(this, "Thêm danh mục thành công", Toast.LENGTH_SHORT).show();
-            Intent resultIntent = new Intent();
-            setResult(RESULT_OK, resultIntent);
-            finish();
+            Toast.makeText(this, "Danh mục không hợp lệ", Toast.LENGTH_SHORT).show();
         }
 
         db.close();
     }
-
 
     private void deleteCategory() {
         if (categoryId == -1) {
