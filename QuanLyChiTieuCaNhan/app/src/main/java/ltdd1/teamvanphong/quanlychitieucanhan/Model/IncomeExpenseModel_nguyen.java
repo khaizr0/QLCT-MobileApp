@@ -63,11 +63,46 @@ public class IncomeExpenseModel_nguyen {
         this.categoryId = categoryId;
     }
 
+    public IncomeExpenseModel_nguyen(SQLiteDatabase database) {
+        this.database = database;
+    }
 
+    public int getTotalExpenseOrIncomeForUser(int userId, int month, int year, int type) {
+        String startDate;
+        String endDate;
+
+        if (month == 0) {
+            startDate = String.format("%04d-01-01", year);
+            endDate = String.format("%04d-12-31", year);
+        } else {
+            startDate = String.format("%04d-%02d-01", year, month);
+            endDate = String.format("%04d-%02d-31", year, month);
+        }
+
+        String query = "SELECT SUM(Amount) " +
+                "FROM IncomeExpense " +
+                "WHERE UserID = ? AND Type = ? AND Date BETWEEN ? AND ?";
+        Cursor cursor = database.rawQuery(query, new String[]{String.valueOf(userId), String.valueOf(type), startDate, endDate});
+
+        int total = 0;
+        if (cursor.moveToFirst()) {
+            total = cursor.getInt(0);
+        }
+        cursor.close();
+        return total;
+    }
     public List<Integer> getExpenseOrIncomeAmountsForUser(int userId, int month, int year, int type) {
         List<Integer> amounts = new ArrayList<>();
-        String startDate = String.format("%04d-%02d-01", year, month);
-        String endDate = String.format("%04d-%02d-31", year, month);
+        String startDate;
+        String endDate;
+
+        if (month == 0) {
+            startDate = String.format("%04d-01-01", year);
+            endDate = String.format("%04d-12-31", year);
+        } else {
+            startDate = String.format("%04d-%02d-01", year, month);
+            endDate = String.format("%04d-%02d-31", year, month);
+        }
 
         String query = "SELECT SUM(IE.Amount) " +
                 "FROM IncomeExpense IE " +

@@ -87,6 +87,7 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 updateCalendar();
+                updateListView();
             }
 
             @Override

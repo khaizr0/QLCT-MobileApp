@@ -20,62 +20,57 @@ import ltdd1.teamvanphong.quanlychitieucanhan.Model.CategoriesModel;
 import ltdd1.teamvanphong.quanlychitieucanhan.Model.IncomeExpenseModel_nguyen;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
-public class ListViewPageCalendarAdapter extends BaseAdapter {
+public class ExpenseListAdapter extends BaseAdapter {
 
     private Context context;
-    private List<IncomeExpenseModel_nguyen> transactions;
+    private List<IncomeExpenseModel_nguyen> expenses;
     private Map<Integer, CategoriesModel> categoryMap;
 
-    public ListViewPageCalendarAdapter(Context context, List<IncomeExpenseModel_nguyen> transactions, Map<Integer, CategoriesModel> categoryMap) {
+    public ExpenseListAdapter(Context context, List<IncomeExpenseModel_nguyen> expenses, Map<Integer, CategoriesModel> categoryMap) {
         this.context = context;
-        this.transactions = transactions;
+        this.expenses = expenses;
         this.categoryMap = categoryMap;
     }
 
     @Override
     public int getCount() {
-        return transactions.size();
+        return expenses.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return transactions.get(position);
+        return expenses.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return transactions.get(position).getIncomeExpenseId();
+        return expenses.get(position).getIncomeExpenseId();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_listview_calendar, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.list_item_expense, parent, false);
         }
 
-        ImageView iconCategory = convertView.findViewById(R.id.iconCategory);
-        TextView txtCategoryName = convertView.findViewById(R.id.txtCategoryName);
-        TextView txtDate = convertView.findViewById(R.id.txtDate);
-        TextView txtAmount = convertView.findViewById(R.id.txtAmount);
+        ImageView imgIcon = convertView.findViewById(R.id.imgIcon);
+        TextView tvCategoryName = convertView.findViewById(R.id.tvCategoryName);
+        TextView tvAmount = convertView.findViewById(R.id.tvAmount);
 
-        IncomeExpenseModel_nguyen transaction = transactions.get(position);
-        CategoriesModel category = categoryMap.get(transaction.getCategoryId());
+        IncomeExpenseModel_nguyen expense = expenses.get(position);
+        CategoriesModel category = categoryMap.get(expense.getCategoryId());
 
         if (category != null) {
             int iconResId = context.getResources().getIdentifier(category.getIconName(), "drawable", context.getPackageName());
             Drawable iconDrawable = ContextCompat.getDrawable(context, iconResId);
             if (iconDrawable != null) {
-                // Set màu cho drawable
-                int color = Color.parseColor(category.getColor());
-                iconDrawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
-                iconCategory.setImageDrawable(iconDrawable);
+                iconDrawable.setColorFilter(Color.parseColor(category.getColor()), PorterDuff.Mode.SRC_IN);
+                imgIcon.setImageDrawable(iconDrawable);
             }
-
-            txtCategoryName.setText(category.getCategoryName());
+            tvCategoryName.setText(category.getCategoryName());
         }
 
-        txtDate.setText(transaction.getDate());
-        txtAmount.setText(transaction.getAmount() + "đ");
+        tvAmount.setText(expense.getAmount() + "đ");
 
         return convertView;
     }
