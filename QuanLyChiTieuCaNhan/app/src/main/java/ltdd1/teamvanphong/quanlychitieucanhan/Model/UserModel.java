@@ -102,7 +102,7 @@ public class UserModel {
         return null;
     }
 
-    //Tien kiểm tra tên đăng nhập và email có tồn tại hay không
+    // kiểm tra tên đăng nhập và email có tồn tại hay không
     public static boolean validateUser(Context context, String username, String email) {
         SQLiteOpenHelper dbHelper = new ExpenseDB(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -115,7 +115,7 @@ public class UserModel {
         return isValid;
     }
 
-    //Tiến cập nhật mật khẩu mới
+    // cập nhật mật khẩu mới
     public static boolean updatePassword(Context context, String username, String newPassword) {
         SQLiteOpenHelper dbHelper = new ExpenseDB(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
