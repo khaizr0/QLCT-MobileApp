@@ -143,6 +143,7 @@ public class InYear_Tong extends Fragment {
         BarData data = new BarData(set);
         barChart.setData(data);
         barChart.invalidate();
+        barChart.getLegend().setTextColor(Color.WHITE);
 
         int totalIncome = yearlySummary.get("TotalIncome");
         int totalExpense = yearlySummary.get("TotalExpense");
@@ -165,7 +166,7 @@ public class InYear_Tong extends Fragment {
                 return "";
             }
         });
-        xAxis.setTextColor(Color.RED); // Thay đổi màu chữ của các nhãn trên trục X
+        xAxis.setTextColor(Color.WHITE); // Thay đổi màu chữ của các nhãn trên trục X
 
         YAxis leftAxis = barChart.getAxisLeft();
         leftAxis.setValueFormatter(new DefaultAxisValueFormatter(0) {
@@ -174,9 +175,9 @@ public class InYear_Tong extends Fragment {
                 return String.format("%.0f VNĐ", value); // Format currency as needed
             }
         });
-        leftAxis.setTextColor(Color.GREEN); // Thay đổi màu chữ của các nhãn trên trục Y bên trái
+        leftAxis.setTextColor(Color.WHITE); // Thay đổi màu chữ của các nhãn trên trục Y bên trái
 
         YAxis rightAxis = barChart.getAxisRight();
-        rightAxis.setTextColor(Color.BLUE);  // Thay đổi màu chữ của các nhãn trên trục Y bên phải (nếu có)
+        rightAxis.setTextColor(Color.WHITE);  // Thay đổi màu chữ của các nhãn trên trục Y bên phải (nếu có)
     }
 }
