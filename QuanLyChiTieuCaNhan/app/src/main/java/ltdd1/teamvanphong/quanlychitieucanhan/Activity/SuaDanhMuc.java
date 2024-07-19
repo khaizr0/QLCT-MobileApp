@@ -1,10 +1,12 @@
 package ltdd1.teamvanphong.quanlychitieucanhan.Activity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -22,8 +24,10 @@ import java.util.List;
 import ltdd1.teamvanphong.quanlychitieucanhan.Adapter.ColorSpinnerAdapter;
 import ltdd1.teamvanphong.quanlychitieucanhan.Adapter.IconSpinnerAdapter;
 import ltdd1.teamvanphong.quanlychitieucanhan.Database.ExpenseDB;
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.CategoriesModel;
 import ltdd1.teamvanphong.quanlychitieucanhan.Model.ColorItem;
 import ltdd1.teamvanphong.quanlychitieucanhan.Model.IconItem;
+import ltdd1.teamvanphong.quanlychitieucanhan.Model.UserModel;
 import ltdd1.teamvanphong.quanlychitieucanhan.R;
 
 public class SuaDanhMuc extends AppCompatActivity {
@@ -43,6 +47,10 @@ public class SuaDanhMuc extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sua_danh_muc);
+
+        // Retrieve user ID from session
+        UserModel session = UserModel.getSessionUser();
+        userId = session.getUserId();
 
         icBack = findViewById(R.id.btn_back);
         icBack.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +108,11 @@ public class SuaDanhMuc extends AppCompatActivity {
             String iconName = cursor.getString(cursor.getColumnIndex("IconName"));
             String color = cursor.getString(cursor.getColumnIndex("Color"));
 
+            // Add log to check the values
+            Log.d("SuaDanhMuc", "Category Name: " + categoryName);
+            Log.d("SuaDanhMuc", "Icon Name: " + iconName);
+            Log.d("SuaDanhMuc", "Color: " + color);
+
             txtCategoryName.setText(categoryName);
 
             // Select the correct icon in spinner
@@ -144,6 +157,8 @@ public class SuaDanhMuc extends AppCompatActivity {
         );
         IconSpinnerAdapter iconAdapter = new IconSpinnerAdapter(this, icons);
         spinnerIcon.setAdapter(iconAdapter);
+
+        Log.d("SuaDanhMuc", "Spinner Icon Count: " + spinnerIcon.getCount());
 
         // Set listener for icon spinner
         spinnerIcon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -198,12 +213,7 @@ public class SuaDanhMuc extends AppCompatActivity {
                 new ColorItem("#8B0000", "Đỏ tối"),
                 new ColorItem("#00BFFF", "Xanh đậm"),
                 new ColorItem("#9400D3", "Tím đậm"),
-                new ColorItem("#8B008B", "Tím tối"),
-                new ColorItem("#8B4513", "Nâu yên ngựa"),
-                new ColorItem("#B8860B", "Vàng sẫm"),
-                new ColorItem("#CD5C5C", "Hồng đất"),
-                new ColorItem("#FF1493", "Hồng đậm"),
-                new ColorItem("#ADFF2F", "Xanh vàng chanh")
+                new ColorItem("#8B008B", "Tím sẫm")
         );
         ColorSpinnerAdapter colorAdapter = new ColorSpinnerAdapter(this, colors);
         spinnerColor.setAdapter(colorAdapter);
@@ -224,57 +234,66 @@ public class SuaDanhMuc extends AppCompatActivity {
     private void updateIconColor() {
         IconItem selectedIcon = (IconItem) spinnerIcon.getSelectedItem();
         ColorItem selectedColor = (ColorItem) spinnerColor.getSelectedItem();
-
-        if (selectedIcon != null && selectedColor != null) {
-            iconPreview.setImageResource(selectedIcon.getIconResId());
-            iconPreview.setColorFilter(Color.parseColor(selectedColor.getColorHex()));
-        }
+        iconPreview.setImageResource(selectedIcon.getIconResId());
+        iconPreview.setColorFilter(Color.parseColor(selectedColor.getColorHex()));
     }
 
     private void saveCategory() {
-        String categoryName = txtCategoryName.getText().toString();
+        String categoryName = txtCategoryName.getText().toString().trim();
         IconItem selectedIcon = (IconItem) spinnerIcon.getSelectedItem();
         ColorItem selectedColor = (ColorItem) spinnerColor.getSelectedItem();
 
-        if (categoryName.isEmpty() || selectedIcon == null || selectedColor == null) {
-            Toast.makeText(this, "Vui lòng nhập tên danh mục, chọn biểu tượng và màu sắc", Toast.LENGTH_SHORT).show();
+        if (categoryName.isEmpty()) {
+            Toast.makeText(this, "Vui lòng nhập tên danh mục", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        ContentValues values = new ContentValues();
-        values.put("CategoryName", categoryName);
-        values.put("IconName", selectedIcon.getName());
-        values.put("Color", selectedColor.getColorHex());
-        values.put("UserID", userId);
-        values.put("Type", currentType);
+        CategoriesModel category = new CategoriesModel();
+        category.setCategoryName(categoryName);
+        category.setIconName(getResources().getResourceEntryName(selectedIcon.getIconResId()));
+        category.setColor(selectedColor.getColorHex());
+        category.setType(currentType);
+        category.setUserId(userId);
 
+        // Lưu danh mục vào cơ sở dữ liệu
         ExpenseDB dbHelper = new ExpenseDB(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        long result = db.update("Categories", values, "CategoryID=?", new String[]{String.valueOf(categoryId)});
-        db.close();
+        ContentValues values = new ContentValues();
+        values.put("CategoryName", category.getCategoryName());
+        values.put("Color", category.getColor());
+        values.put("IconName", category.getIconName());
+        values.put("Type", category.getType());
+        values.put("UserID", category.getUserId());
 
-        if (result != -1) {
-            Toast.makeText(this, "Cập nhật danh mục thành công", Toast.LENGTH_SHORT).show();
-            setResult(RESULT_OK);
-            finish();
+        long newRowId = db.insert("Categories", null, values);
+        if (newRowId == -1) {
+            Toast.makeText(this, "Thêm danh mục thất bại", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Cập nhật danh mục thất bại", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Thêm danh mục thành công", Toast.LENGTH_SHORT).show();
+            Intent resultIntent = new Intent();
+            setResult(RESULT_OK, resultIntent);
+            finish();
         }
+
+        db.close();
     }
 
+
     private void deleteCategory() {
+        if (categoryId == -1) {
+            Toast.makeText(this, "Category does not exist", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         ExpenseDB dbHelper = new ExpenseDB(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int result = db.delete("Categories", "CategoryID=?", new String[]{String.valueOf(categoryId)});
+
+        db.delete("Categories", "CategoryID=?", new String[]{String.valueOf(categoryId)});
+
         db.close();
 
-        if (result != 0) {
-            Toast.makeText(this, "Xóa danh mục thành công", Toast.LENGTH_SHORT).show();
-            setResult(RESULT_OK);
-            finish();
-        } else {
-            Toast.makeText(this, "Xóa danh mục thất bại", Toast.LENGTH_SHORT).show();
-        }
+        Toast.makeText(this, "Category deleted successfully", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }
