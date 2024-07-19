@@ -32,7 +32,7 @@ public class OtherSettingFragment extends Fragment {
         LinearLayout layoutReportYear = view.findViewById(R.id.layout_report_year);
         LinearLayout layoutReportBalance = view.findViewById(R.id.layout_report_balance);
         LinearLayout layoutExport = view.findViewById(R.id.layout_export);
-        //Tien tìm layoutLogout trên frontend
+        // tìm layoutLogout
         LinearLayout layoutLogout = view.findViewById(R.id.layout_logout);
 
         layoutInfo.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +72,7 @@ public class OtherSettingFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        //Tien Gán sự kiện cho logout
+        // Gán sự kiện cho logout
         layoutLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +88,7 @@ public class OtherSettingFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-    //Tien phương thức xử lý đăng xuất
+    // phương thức xử lý đăng xuất
     private void handleLogout() {
         // Clear user session data, dùng để lưu trữ thông tin tài khoản
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
